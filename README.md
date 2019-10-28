@@ -1,5 +1,3 @@
-# test
-
 -- Maze and traps --
 Menu
 GUI
