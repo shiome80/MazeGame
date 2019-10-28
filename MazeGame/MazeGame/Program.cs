@@ -31,6 +31,11 @@ namespace MazeGame
                         EncounterType();
                         break;
                     }
+                default:
+                    {
+                        Console.WriteLine("Wrong input");
+                        break;
+                    }
             }
         }
 
@@ -120,6 +125,9 @@ namespace MazeGame
             if (input.Contains("attack"))
             {
                 Console.WriteLine("You attack the goblin");
+                Console.WriteLine("");
+                Console.ReadKey(true);
+
                 if (chance == 20)
                 {
                     Console.WriteLine("and punch so hard crack his skull open, killing it instantly");
