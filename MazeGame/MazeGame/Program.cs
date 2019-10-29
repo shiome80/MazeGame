@@ -4,13 +4,14 @@ namespace MazeGame
 {
     class Program
     {
-
+        public static int[] playerP = { 2, 2 };
+
         static void Main(string[] args)
-        {
+        {
             GameMenu();
-        }
-
-        // Testing area for our codes
+        }
+
+        // Testing area for our codes
         private static void GameMenu()
         {
             Console.WriteLine("Test af forskellige tasks");
@@ -22,11 +23,12 @@ namespace MazeGame
                 case 1:
                     {
                         //Inventory
+
                         break;
                     }
                 case 2:
                     {
-                        JrjEncounter();
+                        WeirdStranger();
                         break;
                     }
                 case 3:
@@ -179,12 +181,12 @@ namespace MazeGame
                 EncounterType();
                 // continue to next field
             }
-            else
-            {
+            else
+            {
                 Console.WriteLine("Wrong input");
                 Console.WriteLine("Press any key to try again");
-                Console.ReadKey(true);
-                Goblin();
+                Console.ReadKey(true);
+                Goblin();
             }
         }
 
@@ -241,30 +243,30 @@ namespace MazeGame
             }
             else if (input.Contains("look"))
             {
-                if (success != 1)
-                {
-                    Console.WriteLine("You look around and notice some holes in the ground");
-                    Console.ReadKey(true);
-                    Console.WriteLine("You jump the trap and take no damage.");
-                    Console.ReadKey(true);
-                    EncounterType();
+                if (success != 1)
+                {
+                    Console.WriteLine("You look around and notice some holes in the ground");
+                    Console.ReadKey(true);
+                    Console.WriteLine("You jump the trap and take no damage.");
+                    Console.ReadKey(true);
+                    EncounterType();
                 }
-                else
-                {
-                    Console.WriteLine("You attempt to jump over the trap");
-                    Console.ReadKey(true);
-                    Console.WriteLine("But you don't get enough speed get your foot impaled");
-                    Console.WriteLine("And take 20 damage");
-                    Console.ReadKey(true);
-                    EncounterType();
+                else
+                {
+                    Console.WriteLine("You attempt to jump over the trap");
+                    Console.ReadKey(true);
+                    Console.WriteLine("But you don't get enough speed get your foot impaled");
+                    Console.WriteLine("And take 20 damage");
+                    Console.ReadKey(true);
+                    EncounterType();
                 }
             }
-            else
-            {
+            else
+            {
                 Console.WriteLine("Wrong input");
                 Console.WriteLine("Press any key to try again");
-                Console.ReadKey(true);
-                SpikeTrap();
+                Console.ReadKey(true);
+                SpikeTrap();
             }
         }
 
@@ -301,148 +303,165 @@ namespace MazeGame
                     EncounterType();
                 }
             }
-            else if (input.Contains("leave"))
-            {
-                Console.WriteLine("You leave the potion");
-                Console.ReadKey(true);
-                EncounterType();
+            else if (input.Contains("leave"))
+            {
+                Console.WriteLine("You leave the potion");
+                Console.ReadKey(true);
+                EncounterType();
             }
-            else
-            {
+            else
+            {
                 Console.WriteLine("Wrong input");
                 Console.WriteLine("Press any key to try again");
-                Console.ReadKey(true);
-                Lucky();
+                Console.ReadKey(true);
+                Lucky();
             }
-        }
-
-        private static void LeverFun()
-        {
-            Console.Clear();
-            Console.WriteLine("You come across an old, almost rotten wooden lever");
-            Console.ReadKey(true);
-            Console.WriteLine("The tiles on the floor are not like the rest of the maze");
-            Console.ReadKey(true);
-            Console.WriteLine("What do you do?");
-            Console.WriteLine("1. Continue Walking \n2. Pull Lever");
-            string input = Console.ReadLine().ToLower().Trim();
-
-            Random chance = new Random();
-            int success = chance.Next(1, 21);
-
-            if (input.Contains("1"))
-            {
-                Console.WriteLine("You walk across the odd looking tiles");
-                Console.ReadKey(true);
-                if (success == 1)
-                {
-                    Console.WriteLine("This triggers a hidden trap \nAn arrow flies out of the wall and hits your arm \nYou take 10 damage");
-                }
-                else if (success <= 20)
-                {
-                    Console.WriteLine("Good thing nothing happened");
-                    Console.ReadKey();
-                }
-            }
-            else if (input.Contains("2"))
-            {
-                Console.WriteLine("You pull the lever");
-                Console.ReadKey(true);
-                if (success == 1)
-                {
-                    Console.WriteLine("But the slightest touch breaks the lever");
-                    Console.ReadKey(true);
-                    Console.WriteLine("You continue walking");
-                    Console.ReadKey(true);
-                    EncounterType();
-                }
-                else if (success > 1 && success < 20)
-                {
-                    Console.WriteLine("You don't notice anything happening \nUntil a stretching arm with a boxing glove hits you hard in the nuts");
-                    Console.WriteLine("You take 20 damage and leave your masculinity");
-                    Console.ReadKey(true);
-                    EncounterType();
-                }
-                else if (success == 20)
-                {
-                    Console.WriteLine("The lever opens a hidden door");
-                    Console.ReadKey(true);
-                    Console.WriteLine("Do you want to continue or see what is inside?");
-                    Console.WriteLine("1. Walk the Maze \n2. Hidden Room");
-                    input = Console.ReadLine().Trim().ToLower();
-
-                    if (input != "1")
-                    {
-                        JrjEncounter();
-                    }
-                    else
-                    {
-                        EncounterType();
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Wrong input");
-                    Console.WriteLine("Press any key to try again");
-                    Console.ReadKey(true);
-                    LeverFun();
-                }
-            }
-        }
-        static void JrjEncounter()
-        {
-            string[] differentItems = { "Potion of Health", "Plague" };
-            Random rndNumber = new Random();
-
-            int i = rndNumber.Next(differentItems.Length);
-
-            int health = 100;
-
-            Console.WriteLine("Health: " + health);
-
-            Console.WriteLine("You have met weird looking stranger. He want to give you a present.Do you accept it?\n[Y] or [N]");
-            string input = Console.ReadLine();
-
-            if (input.ToLower() == "y")
-            {
-                if (differentItems[i] == "Potion of Health")
-                {
-                    Console.WriteLine($"You got a {differentItems[i]} and increased your health ny 10");
-                    health = health + 10;
-                }
-                else
-                {
-                    Console.WriteLine($"You got a {differentItems[i]} and took 20 damage!");
-                    health = health - 20;
-                }
-            }
-            else
-            {
-                Console.WriteLine("You like playing it safe and move on!");
-            }
-
-            Console.WriteLine("Health: " + health);
+        }
+        private static void LeverFun()
+        {
+            Console.Clear();
+            Console.WriteLine("You come across an old, almost rotten wooden lever");
+            Console.ReadKey(true);
+            Console.WriteLine("The tiles on the floor are not like the rest of the maze");
+            Console.ReadKey(true);
+            Console.WriteLine("What do you do?");
+            Console.WriteLine("1. Continue Walking \n2. Pull Lever");
+            string input = Console.ReadLine().ToLower().Trim();
+
+            Random chance = new Random();
+            int success = chance.Next(1, 21);
+
+            if (input.Contains("1"))
+            {
+                Console.WriteLine("You walk across the odd looking tiles");
+                Console.ReadKey(true);
+                if (success == 1)
+                {
+                    Console.WriteLine("This triggers a hidden trap \nAn arrow flies out of the wall and hits your arm \nYou take 10 damage");
+                }
+                else if (success <= 20)
+                {
+                    Console.WriteLine("Good thing nothing happened");
+                    Console.ReadKey();
+                }
+            }
+            else if (input.Contains("2"))
+            {
+                Console.WriteLine("You pull the lever");
+                Console.ReadKey(true);
+                if (success == 1)
+                {
+                    Console.WriteLine("But the slightest touch breaks the lever");
+                    Console.ReadKey(true);
+                    Console.WriteLine("You continue walking");
+                    Console.ReadKey(true);
+                    EncounterType();
+                }
+                else if (success > 1 && success < 20)
+                {
+                    Console.WriteLine("You don't notice anything happening \nUntil a stretching arm with a boxing glove hits you hard in the nuts");
+                    Console.WriteLine("You take 20 damage and leave your masculinity");
+                    Console.ReadKey(true);
+                    EncounterType();
+                }
+                else if (success == 20)
+                {
+                    Console.WriteLine("The lever opens a hidden door");
+                    Console.ReadKey(true);
+                    Console.WriteLine("Do you want to continue or see what is inside?");
+                    Console.WriteLine("1. Walk the Maze \n2. Hidden Room");
+                    input = Console.ReadLine().Trim().ToLower();
+
+                    if (input != "1")
+                    {
+                        WeirdStranger();
+                    }
+                    else
+                    {
+                        EncounterType();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Wrong input");
+                    Console.WriteLine("Press any key to try again");
+                    Console.ReadKey(true);
+                    LeverFun();
+                }
+            }
+        }
+        static void WeirdStranger()
+        {
+            string[] differentItems = { "Potion of Health", "Plague" };
+            Random rndNumber = new Random();
+
+            int i = rndNumber.Next(differentItems.Length);
+
+            Console.WriteLine("You have met weird looking stranger. He wants to give you a present.Do you accept it?\n[Y] or [N]");
+            string input = Console.ReadLine();
+
+            if (input.ToLower() == "y")
+            {
+                if (differentItems[i] == "Potion of Health")
+                {
+                    Console.WriteLine($"You got a {differentItems[i]} and increased your health by 10");
+                }
+                else
+                {
+                    Console.WriteLine($"You got a {differentItems[i]} and took 20 damage!");
+                }
+            }
+            else
+            {
+                Console.WriteLine("You like playing it safe and move on!");
+            }
+
+            //Console.WriteLine("Health: " + health);
         }
 
         // User Interface
-        static void GuiDrawLine(int[] Maze, int line)
-        {
-            ConsoleColor[] Color = { ConsoleColor.Green, ConsoleColor.Red, ConsoleColor.Cyan };
-            int i = 0 + line * 56;
-            while (i < i + 56)
-            {
-                //Console.BackgroundColor = Color[2];
-                //Console.ForegroundColor = Color[1];
-                Console.Write(Maze[i]);
-                if (Maze[i] == 1)
-                {
-
-                }
-                i += 1;
-            }
+        static void GuiDrawLine(int[] Maze, int line)
+        {
+           
+            int i = 1 * line * 56 ;
+            while (i < 1 * line * 56 + 56)
+            {
+                //Console.BackgroundColor = Color[2];
+                //Console.ForegroundColor = Color[1];
+                //Console.Write(Maze[i + line * 56]);
+                switch (Maze[i])
+                {
+                    case 0:
+                        {
+                            Console.Write(" ");
+                            break;
+                        }
+                    case 1:
+                        {
+                            Console.Write("█");
+                            break;
+                        }
+                    case 2:
+                        {
+                            Console.Write("▓");
+                            break;
+                        }
+                    case 5:                        {
+                            Console.Write("¤");
+                            break;
+                        }
+                    default:
+                        {
+                            Console.Write(" ");
+                            break;
+                        }
+
+                }
+                i += 1;
+            }
         }
-        static void Gui()
-        {
+        static void Gui()
+        {
             int[] Maze = {  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                             1, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 2, 2, 0, 0, 0, 2, 2, 0, 0, 2, 2, 0, 1,
                             1, 0, 2, 2, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 2, 0, 0, 2, 0, 2, 0, 0, 2, 2, 0, 0, 2, 1,
@@ -473,42 +492,146 @@ namespace MazeGame
                             1, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 2, 2, 0, 0, 0, 2, 2, 0, 0, 2, 2, 0, 1,
                             1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                            };
-            // 0 = passage
-            // 1 = frame
-            // 2 = wall
+            //1 = ydre mur
+            //2 = inder mur
+            //0 = pathway
+            
 
-            Console.WriteLine("\t╔══════════════════════════════════════════════════════╗");
-            Console.Write("\t║"); GuiDrawLine(Maze, 0); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 1); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 2); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 3); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 4); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 5); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 6); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 7); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 8); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 9); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 10); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 11); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 12); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 13); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 14); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 15); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 16); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 17); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 19); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 20); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 21); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 22); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 23); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 24); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 25); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 26); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 27); Console.WriteLine("║");
-            Console.WriteLine("\t╚══════════════════════════════════════════════════════╝");
+            Maze[(playerP[0] - 1 ) + ((31 - playerP[1]) * 56)] = 5;
 
-            Console.ReadLine();
+            Console.Clear();
+            GuiDrawLine(Maze, 0);Console.WriteLine();
+            GuiDrawLine(Maze, 1); Console.WriteLine();
+            GuiDrawLine(Maze, 2); Console.WriteLine();
+            GuiDrawLine(Maze, 3); Console.WriteLine();
+            GuiDrawLine(Maze, 4); Console.WriteLine();
+            GuiDrawLine(Maze, 5); Console.WriteLine();
+            GuiDrawLine(Maze, 6); Console.WriteLine();
+            GuiDrawLine(Maze, 7); Console.WriteLine();
+            GuiDrawLine(Maze, 8); Console.WriteLine();
+            GuiDrawLine(Maze, 9); Console.WriteLine();
+            GuiDrawLine(Maze, 10); Console.WriteLine();
+            GuiDrawLine(Maze, 11); Console.WriteLine();
+            GuiDrawLine(Maze, 12); Console.WriteLine();
+            GuiDrawLine(Maze, 13); Console.WriteLine();
+            GuiDrawLine(Maze, 14); Console.WriteLine();
+            GuiDrawLine(Maze, 15); Console.WriteLine();
+            GuiDrawLine(Maze, 16); Console.WriteLine();
+            GuiDrawLine(Maze, 17); Console.WriteLine();
+            GuiDrawLine(Maze, 19); Console.WriteLine();
+            GuiDrawLine(Maze, 20); Console.WriteLine();
+            GuiDrawLine(Maze, 21); Console.WriteLine();
+            GuiDrawLine(Maze, 22); Console.WriteLine();
+            GuiDrawLine(Maze, 23); Console.WriteLine();
+            GuiDrawLine(Maze, 24); Console.WriteLine();
+            GuiDrawLine(Maze, 25); Console.WriteLine();
+            GuiDrawLine(Maze, 26); Console.WriteLine();
+            GuiDrawLine(Maze, 27); Console.WriteLine();
+            GuiDrawLine(Maze, 28); Console.WriteLine();
+            GuiDrawLine(Maze, 29); Console.WriteLine();
+            GuiDrawLine(Maze, 30); Console.Write("");
+            ConsoleKeyInfo key = Console.ReadKey();
+            if (key.Key == ConsoleKey.UpArrow)
+            {
+                if (Maze[(playerP[0] - 1) + ((31 - (playerP[1] + 1)) * 56)] == 0)
+                {
+                    playerP[1] += 1;
+
+                }
+            }
+            else if (key.Key == ConsoleKey.DownArrow)
+            {
+                if (Maze[(playerP[0] - 1) + ((31 - (playerP[1] - 1)) * 56)] == 0)
+                {
+                    playerP[1] -= 1;
+
+                }
+            }
+            else if (key.Key == ConsoleKey.RightArrow)
+            {
+                if (Maze[(playerP[0]) + ((31 - (playerP[1])) * 56)] == 0)
+                {
+                    playerP[0] += 1;
+
+                }
+            }
+            else if (key.Key == ConsoleKey.LeftArrow)
+            {
+                if (Maze[(playerP[0] - 2) + ((31 - (playerP[1])) * 56)] == 0)
+                {
+                    playerP[0] -= 1;
+
+                }
+            }
+            else if (key.Key == ConsoleKey.Escape)
+            {
+
+            }
+            else if (key.Key == ConsoleKey.E) 
+            { 
+
+            }
+            else if (key.Key == ConsoleKey.Enter || key.Key == ConsoleKey.Spacebar)
+            {
+
+            }
+            Gui();
         }
 
+
+        static bool AddItem(int itemId)
+        {
+            int maxSlots = 5;
+            int[] items = new int[maxSlots];
+
+            for (int i = 0; i < maxSlots; i++)
+            {
+                //check if slot is empty
+                if (items[i] == 0)
+                {
+                    //add item in empty slot
+                    items[i] = itemId;
+                    return true;
+                }
+            }
+            //inventory is full
+            return false;
+        }
+
+        static bool RemoveItem(int itemId)
+        {
+            int maxSlots = 5;
+            int[] items = new int[maxSlots];
+
+            for (int i = 0; i < maxSlots; i++)
+            {
+                //checks each slot for the matching item id  
+                if (items[i] == itemId)
+                {
+                    //remove item from slot
+                    items[i] = 0;
+                    return true;
+                }
+            }
+            //item doesnt exist in inventory 
+            return false;
+        }
+
+        static bool CheckItemInInventory(int itemId)
+        {
+            int maxSlots = 5;
+            int[] items = new int[maxSlots];
+
+            for (int i = 0; i < maxSlots; i++)
+            {
+                //
+                if (items[i] == itemId)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }
