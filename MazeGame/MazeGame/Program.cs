@@ -31,7 +31,8 @@ namespace MazeGame
                     }
                 case 3:
                     {
-                        EncounterType();
+                        //EncounterType();
+                        LeverFun();
                         break;
                     }
                 case 4:
@@ -315,6 +316,79 @@ namespace MazeGame
             }
         }
 
+        private static void LeverFun()
+        {
+            Console.Clear();
+            Console.WriteLine("You come across an old, almost rotten wooden lever");
+            Console.ReadKey(true);
+            Console.WriteLine("The tiles on the floor are not like the rest of the maze");
+            Console.ReadKey(true);
+            Console.WriteLine("What do you do?");
+            Console.WriteLine("1. Continue Walking \n2. Pull Lever");
+            string input = Console.ReadLine().ToLower().Trim();
+
+            Random chance = new Random();
+            int success = chance.Next(1, 21);
+
+            if (input.Contains("1"))
+            {
+                Console.WriteLine("You walk across the odd looking tiles");
+                Console.ReadKey(true);
+                if (success == 1)
+                {
+                    Console.WriteLine("This triggers a hidden trap \nAn arrow flies out of the wall and hits your arm \nYou take 10 damage");
+                }
+                else if (success <= 20)
+                {
+                    Console.WriteLine("Good thing nothing happened");
+                    Console.ReadKey();
+                }
+            }
+            else if (input.Contains("2"))
+            {
+                Console.WriteLine("You pull the lever");
+                Console.ReadKey(true);
+                if (success == 1)
+                {
+                    Console.WriteLine("But the slightest touch breaks the lever");
+                    Console.ReadKey(true);
+                    Console.WriteLine("You continue walking");
+                    Console.ReadKey(true);
+                    EncounterType();
+                }
+                else if (success > 1 && success < 20)
+                {
+                    Console.WriteLine("You don't notice anything happening \nUntil a stretching arm with a boxing glove hits you hard in the nuts");
+                    Console.WriteLine("You take 20 damage and leave your masculinity");
+                    Console.ReadKey(true);
+                    EncounterType();
+                }
+                else if (success == 20)
+                {
+                    Console.WriteLine("The lever opens a hidden door");
+                    Console.ReadKey(true);
+                    Console.WriteLine("Do you want to continue or see what is inside?");
+                    Console.WriteLine("1. Walk the Maze \n2. Hidden Room");
+                    input = Console.ReadLine().Trim().ToLower();
+
+                    if (input != "1")
+                    {
+                        JrjEncounter();
+                    }
+                    else
+                    {
+                        EncounterType();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Wrong input");
+                    Console.WriteLine("Press any key to try again");
+                    Console.ReadKey(true);
+                    LeverFun();
+                }
+            }
+        }
         static void JrjEncounter()
         {
             string[] differentItems = { "Potion of Health", "Plague" };
