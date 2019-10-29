@@ -3,45 +3,45 @@
 namespace MazeGame
 {
     class Program
-    {
-
+    {
+
         static void Main(string[] args)
         {
             GameMenu();
-        }
-        static void jrjEncounter()
-        {
-            string[] differentItems = { "Potion of Health", "Plague" };
-            Random rndNumber = new Random();
-
-            int i = rndNumber.Next(differentItems.Length);
-
-            int health = 100;
-
-            Console.WriteLine("Health: " + health);
-
-            Console.WriteLine("You have met weird looking stranger. He want to give you a present.Do you accept it?\n[Y] or [N]");
-            string input = Console.ReadLine();
-
-            if (input.ToLower() == "y")
-            {
-                if (differentItems[i] == "Potion of Health")
-                {
-                    Console.WriteLine($"You got a {differentItems[i]} and increased your health ny 10");
-                    health = health + 10;
-                }
-                else
-                {
-                    Console.WriteLine($"You got a {differentItems[i]} and took 20 damage!");
-                    health = health - 20;
-                }
-            }
-            else
-            {
-                Console.WriteLine("You like playing it safe and move on!");
-            }
-
-            Console.WriteLine("Health: " + health);
+        }
+        static void jrjEncounter()
+        {
+            string[] differentItems = { "Potion of Health", "Plague" };
+            Random rndNumber = new Random();
+
+            int i = rndNumber.Next(differentItems.Length);
+
+            int health = 100;
+
+            Console.WriteLine("Health: " + health);
+
+            Console.WriteLine("You have met weird looking stranger. He want to give you a present.Do you accept it?\n[Y] or [N]");
+            string input = Console.ReadLine();
+
+            if (input.ToLower() == "y")
+            {
+                if (differentItems[i] == "Potion of Health")
+                {
+                    Console.WriteLine($"You got a {differentItems[i]} and increased your health ny 10");
+                    health = health + 10;
+                }
+                else
+                {
+                    Console.WriteLine($"You got a {differentItems[i]} and took 20 damage!");
+                    health = health - 20;
+                }
+            }
+            else
+            {
+                Console.WriteLine("You like playing it safe and move on!");
+            }
+
+            Console.WriteLine("Health: " + health);
         }
 
         private static void EncounterType ()
@@ -265,24 +265,24 @@ namespace MazeGame
                 }
             }
         }
-        static void GuiDrawLine(int[] Maze, int line)
-        {
-            ConsoleColor[] Color = { ConsoleColor.Green, ConsoleColor.Red, ConsoleColor.Cyan };
-            int i = 0 + line * 56;
-            while (i < i + 56)
-            {
-                //Console.BackgroundColor = Color[2];
-                //Console.ForegroundColor = Color[1];
-                Console.Write(Maze[i]);
-                if (Maze[i] == 1)
-                {
-
-                }
-                i += 1;
-            }
+        static void GuiDrawLine(int[] Maze, int line)
+        {
+            ConsoleColor[] Color = { ConsoleColor.Green, ConsoleColor.Red, ConsoleColor.Cyan };
+            int i = 0 + line * 56;
+            while (i < i + 56)
+            {
+                //Console.BackgroundColor = Color[2];
+                //Console.ForegroundColor = Color[1];
+                Console.Write(Maze[i]);
+                if (Maze[i] == 1)
+                {
+
+                }
+                i += 1;
+            }
         }
-        static void Gui()
-        {
+        static void Gui()
+        {
             int[] Maze = {  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                             1, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
                             1, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
@@ -313,36 +313,36 @@ namespace MazeGame
                             1, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
                             1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                            };
-            
-            Console.WriteLine("\t╔══════════════════════════════════════════════════════╗");
-            Console.Write("\t║"); GuiDrawLine(Maze, 0); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 1); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 2); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 3); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 4); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 5); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 6); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 7); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 8); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 9); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 10); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 11); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 12); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 13); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 14); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 15); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 16); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 17); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 19); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 20); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 21); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 22); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 23); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 24); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 25); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 26); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 27); Console.WriteLine("║");
-            Console.WriteLine("\t╚══════════════════════════════════════════════════════╝");
+            
+            Console.WriteLine("\t╔══════════════════════════════════════════════════════╗");
+            Console.Write("\t║"); GuiDrawLine(Maze, 0); Console.WriteLine("║");
+            Console.Write("\t║"); GuiDrawLine(Maze, 1); Console.WriteLine("║");
+            Console.Write("\t║"); GuiDrawLine(Maze, 2); Console.WriteLine("║");
+            Console.Write("\t║"); GuiDrawLine(Maze, 3); Console.WriteLine("║");
+            Console.Write("\t║"); GuiDrawLine(Maze, 4); Console.WriteLine("║");
+            Console.Write("\t║"); GuiDrawLine(Maze, 5); Console.WriteLine("║");
+            Console.Write("\t║"); GuiDrawLine(Maze, 6); Console.WriteLine("║");
+            Console.Write("\t║"); GuiDrawLine(Maze, 7); Console.WriteLine("║");
+            Console.Write("\t║"); GuiDrawLine(Maze, 8); Console.WriteLine("║");
+            Console.Write("\t║"); GuiDrawLine(Maze, 9); Console.WriteLine("║");
+            Console.Write("\t║"); GuiDrawLine(Maze, 10); Console.WriteLine("║");
+            Console.Write("\t║"); GuiDrawLine(Maze, 11); Console.WriteLine("║");
+            Console.Write("\t║"); GuiDrawLine(Maze, 12); Console.WriteLine("║");
+            Console.Write("\t║"); GuiDrawLine(Maze, 13); Console.WriteLine("║");
+            Console.Write("\t║"); GuiDrawLine(Maze, 14); Console.WriteLine("║");
+            Console.Write("\t║"); GuiDrawLine(Maze, 15); Console.WriteLine("║");
+            Console.Write("\t║"); GuiDrawLine(Maze, 16); Console.WriteLine("║");
+            Console.Write("\t║"); GuiDrawLine(Maze, 17); Console.WriteLine("║");
+            Console.Write("\t║"); GuiDrawLine(Maze, 19); Console.WriteLine("║");
+            Console.Write("\t║"); GuiDrawLine(Maze, 20); Console.WriteLine("║");
+            Console.Write("\t║"); GuiDrawLine(Maze, 21); Console.WriteLine("║");
+            Console.Write("\t║"); GuiDrawLine(Maze, 22); Console.WriteLine("║");
+            Console.Write("\t║"); GuiDrawLine(Maze, 23); Console.WriteLine("║");
+            Console.Write("\t║"); GuiDrawLine(Maze, 24); Console.WriteLine("║");
+            Console.Write("\t║"); GuiDrawLine(Maze, 25); Console.WriteLine("║");
+            Console.Write("\t║"); GuiDrawLine(Maze, 26); Console.WriteLine("║");
+            Console.Write("\t║"); GuiDrawLine(Maze, 27); Console.WriteLine("║");
+            Console.WriteLine("\t╚══════════════════════════════════════════════════════╝");
 
             Console.ReadLine();
         }
