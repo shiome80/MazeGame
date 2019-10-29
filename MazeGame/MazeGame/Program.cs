@@ -3,7 +3,7 @@ using System;
 namespace MazeGame
 {
     class Program
-    {
+    { 
 
         static void Main(string[] args)
         {
@@ -22,11 +22,12 @@ namespace MazeGame
                 case 1:
                     {
                         //Inventory
+
                         break;
                     }
                 case 2:
                     {
-                        JrjEncounter();
+                        WeirdStranger();
                         break;
                     }
                 case 3:
@@ -373,7 +374,7 @@ namespace MazeGame
 
                     if (input != "1")
                     {
-                        JrjEncounter();
+                        WeirdStranger();
                     }
                     else
                     {
@@ -389,31 +390,25 @@ namespace MazeGame
                 }
             }
         }
-        static void JrjEncounter()
+        static void WeirdStranger()
         {
             string[] differentItems = { "Potion of Health", "Plague" };
             Random rndNumber = new Random();
 
             int i = rndNumber.Next(differentItems.Length);
 
-            int health = 100;
-
-            Console.WriteLine("Health: " + health);
-
-            Console.WriteLine("You have met weird looking stranger. He want to give you a present.Do you accept it?\n[Y] or [N]");
+            Console.WriteLine("You have met weird looking stranger. He wants to give you a present.Do you accept it?\n[Y] or [N]");
             string input = Console.ReadLine();
 
             if (input.ToLower() == "y")
             {
                 if (differentItems[i] == "Potion of Health")
                 {
-                    Console.WriteLine($"You got a {differentItems[i]} and increased your health ny 10");
-                    health = health + 10;
+                    Console.WriteLine($"You got a {differentItems[i]} and increased your health by 10");
                 }
                 else
                 {
                     Console.WriteLine($"You got a {differentItems[i]} and took 20 damage!");
-                    health = health - 20;
                 }
             }
             else
@@ -421,7 +416,7 @@ namespace MazeGame
                 Console.WriteLine("You like playing it safe and move on!");
             }
 
-            Console.WriteLine("Health: " + health);
+            //Console.WriteLine("Health: " + health);
         }
 
         // User Interface
