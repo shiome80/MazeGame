@@ -3,7 +3,8 @@ using System;
 namespace MazeGame
 {
     class Program
-    { 
+    {
+        public static int[] playerP = { 2, 2 };
 
         static void Main(string[] args)
         {
@@ -421,7 +422,7 @@ namespace MazeGame
         // User Interface
         static void GuiDrawLine(int[] Maze, int line)
         {
-            ConsoleColor[] Color = { ConsoleColor.Green, ConsoleColor.Red, ConsoleColor.Cyan };
+           
             int i = 1 * line * 56 ;
             while (i < 1 * line * 56 + 56)
             {
@@ -444,6 +445,10 @@ namespace MazeGame
                         {
                             Console.Write("▓");
                             break;
+                        }
+                    case 5:                        {
+                            Console.Write("¤");
+                            break;
                         }
                     default:
                         {
@@ -492,6 +497,10 @@ namespace MazeGame
             //1 = ydre mur
             //2 = inder mur
             //0 = pathway
+            
+
+            Maze[(playerP[0] - 1 ) + ((31 - playerP[1]) * 56)] = 5;
+
             Console.Clear();
             GuiDrawLine(Maze, 0);Console.WriteLine();
             GuiDrawLine(Maze, 1); Console.WriteLine();
