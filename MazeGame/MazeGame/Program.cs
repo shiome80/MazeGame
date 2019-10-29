@@ -532,8 +532,52 @@ namespace MazeGame
             GuiDrawLine(Maze, 28); Console.WriteLine();
             GuiDrawLine(Maze, 29); Console.WriteLine();
             GuiDrawLine(Maze, 30); Console.Write("");
+            ConsoleKeyInfo key = Console.ReadKey();
+            if (key.Key == ConsoleKey.UpArrow)
+            {
+                if (Maze[(playerP[0] - 1) + ((31 - (playerP[1] + 1)) * 56)] == 0)
+                {
+                    playerP[1] += 1;
 
-            Console.ReadLine();
+                }
+            }
+            else if (key.Key == ConsoleKey.DownArrow)
+            {
+                if (Maze[(playerP[0] - 1) + ((31 - (playerP[1] - 1)) * 56)] == 0)
+                {
+                    playerP[1] -= 1;
+
+                }
+            }
+            else if (key.Key == ConsoleKey.RightArrow)
+            {
+                if (Maze[(playerP[0]) + ((31 - (playerP[1])) * 56)] == 0)
+                {
+                    playerP[0] += 1;
+
+                }
+            }
+            else if (key.Key == ConsoleKey.LeftArrow)
+            {
+                if (Maze[(playerP[0] - 2) + ((31 - (playerP[1])) * 56)] == 0)
+                {
+                    playerP[0] -= 1;
+
+                }
+            }
+            else if (key.Key == ConsoleKey.Escape)
+            {
+
+            }
+            else if (key.Key == ConsoleKey.E) 
+            { 
+
+            }
+            else if (key.Key == ConsoleKey.Enter || key.Key == ConsoleKey.Spacebar)
+            {
+
+            }
+            Gui();
         }
 
 
