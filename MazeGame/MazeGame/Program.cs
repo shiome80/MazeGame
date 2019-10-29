@@ -423,14 +423,34 @@ namespace MazeGame
         static void GuiDrawLine(int[] Maze, int line)
         {
             ConsoleColor[] Color = { ConsoleColor.Green, ConsoleColor.Red, ConsoleColor.Cyan };
-            int i = 0 + line * 56;
-            while (i < i + 56)
+            int i = 1 * line * 56 ;
+            while (i < 1 * line * 56 + 56)
             {
                 //Console.BackgroundColor = Color[2];
                 //Console.ForegroundColor = Color[1];
-                Console.Write(Maze[i]);
-                if (Maze[i] == 1)
+                //Console.Write(Maze[i + line * 56]);
+                switch (Maze[i])
                 {
+                    case 0:
+                        {
+                            Console.Write(" ");
+                            break;
+                        }
+                    case 1:
+                        {
+                            Console.Write("█");
+                            break;
+                        }
+                    case 2:
+                        {
+                            Console.Write("▓");
+                            break;
+                        }
+                    default:
+                        {
+                            Console.Write(" ");
+                            break;
+                        }
 
                 }
                 i += 1;
@@ -466,41 +486,44 @@ namespace MazeGame
                             1, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
                             1, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
                             1, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+                            1, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+                            1, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
                             1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                           };
-            // 0 = passage
-            // 1 = frame
-            // 2 = wall
-
-            Console.WriteLine("\t╔══════════════════════════════════════════════════════╗");
-            Console.Write("\t║"); GuiDrawLine(Maze, 0); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 1); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 2); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 3); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 4); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 5); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 6); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 7); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 8); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 9); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 10); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 11); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 12); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 13); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 14); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 15); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 16); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 17); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 19); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 20); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 21); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 22); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 23); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 24); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 25); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 26); Console.WriteLine("║");
-            Console.Write("\t║"); GuiDrawLine(Maze, 27); Console.WriteLine("║");
-            Console.WriteLine("\t╚══════════════════════════════════════════════════════╝");
+                           };
+            //1 = ydre mur
+            //2 = inder mur
+            //0 = pathway
+            Console.Clear();
+            GuiDrawLine(Maze, 0);Console.WriteLine();
+            GuiDrawLine(Maze, 1); Console.WriteLine();
+            GuiDrawLine(Maze, 2); Console.WriteLine();
+            GuiDrawLine(Maze, 3); Console.WriteLine();
+            GuiDrawLine(Maze, 4); Console.WriteLine();
+            GuiDrawLine(Maze, 5); Console.WriteLine();
+            GuiDrawLine(Maze, 6); Console.WriteLine();
+            GuiDrawLine(Maze, 7); Console.WriteLine();
+            GuiDrawLine(Maze, 8); Console.WriteLine();
+            GuiDrawLine(Maze, 9); Console.WriteLine();
+            GuiDrawLine(Maze, 10); Console.WriteLine();
+            GuiDrawLine(Maze, 11); Console.WriteLine();
+            GuiDrawLine(Maze, 12); Console.WriteLine();
+            GuiDrawLine(Maze, 13); Console.WriteLine();
+            GuiDrawLine(Maze, 14); Console.WriteLine();
+            GuiDrawLine(Maze, 15); Console.WriteLine();
+            GuiDrawLine(Maze, 16); Console.WriteLine();
+            GuiDrawLine(Maze, 17); Console.WriteLine();
+            GuiDrawLine(Maze, 19); Console.WriteLine();
+            GuiDrawLine(Maze, 20); Console.WriteLine();
+            GuiDrawLine(Maze, 21); Console.WriteLine();
+            GuiDrawLine(Maze, 22); Console.WriteLine();
+            GuiDrawLine(Maze, 23); Console.WriteLine();
+            GuiDrawLine(Maze, 24); Console.WriteLine();
+            GuiDrawLine(Maze, 25); Console.WriteLine();
+            GuiDrawLine(Maze, 26); Console.WriteLine();
+            GuiDrawLine(Maze, 27); Console.WriteLine();
+            GuiDrawLine(Maze, 28); Console.WriteLine();
+            GuiDrawLine(Maze, 29); Console.WriteLine();
+            GuiDrawLine(Maze, 30); Console.Write("");
 
             Console.ReadLine();
         }
