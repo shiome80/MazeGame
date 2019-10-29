@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace MazeGame
 {
@@ -9,39 +9,42 @@ namespace MazeGame
         {
             GameMenu();
         }
-        static void jrjEncounter()
+
+        // Testing area for our codes
+        private static void GameMenu()
         {
-            string[] differentItems = { "Potion of Health", "Plague" };
-            Random rndNumber = new Random();
+            Console.WriteLine("Test af forskellige tasks");
+            Console.WriteLine("Brug: 1, 2, 3, 4");
+            int testInput = int.Parse(Console.ReadLine());
 
-            int i = rndNumber.Next(differentItems.Length);
-
-            int health = 100;
-
-            Console.WriteLine("Health: " + health);
-
-            Console.WriteLine("You have met weird looking stranger. He want to give you a present.Do you accept it?\n[Y] or [N]");
-            string input = Console.ReadLine();
-
-            if (input.ToLower() == "y")
+            switch (testInput)
             {
-                if (differentItems[i] == "Potion of Health")
-                {
-                    Console.WriteLine($"You got a {differentItems[i]} and increased your health ny 10");
-                    health = health + 10;
-                }
-                else
-                {
-                    Console.WriteLine($"You got a {differentItems[i]} and took 20 damage!");
-                    health = health - 20;
-                }
+                case 1:
+                    {
+                        //Inventory
+                        break;
+                    }
+                case 2:
+                    {
+                        JrjEncounter();
+                        break;
+                    }
+                case 3:
+                    {
+                        EncounterType();
+                        break;
+                    }
+                case 4:
+                    {
+                        Gui();
+                        break;
+                    }
+                default:
+                    {
+                        Console.WriteLine("Wrong input");
+                        break;
+                    }
             }
-            else
-            {
-                Console.WriteLine("You like playing it safe and move on!");
-            }
-
-            Console.WriteLine("Health: " + health);
         }
 
         private static void EncounterType ()
@@ -78,6 +81,8 @@ namespace MazeGame
                     }
             }
         }
+
+        // Encounters
         private static void DeathTrap()
         {
             Console.Clear();
@@ -117,7 +122,7 @@ namespace MazeGame
         {
             Console.Clear();
             Random rand = new Random();
-            int chance = rand.Next(1, 20);
+            int chance = rand.Next(1, 21);
 
             string input;
             Console.WriteLine("You stand before a single goblin");
@@ -173,13 +178,20 @@ namespace MazeGame
                 EncounterType();
                 // continue to next field
             }
+            else
+            {
+                Console.WriteLine("Wrong input");
+                Console.WriteLine("Press any key to try again");
+                Console.ReadKey(true);
+                Goblin();
+            }
         }
 
         private static void TripWire()
         {
             Console.Clear();
             Random chance = new Random();
-            int success = chance.Next(1, 3);
+            int success = chance.Next(1, 4);
 
             Console.WriteLine("There is a trip wire near the ground");
             Console.ReadKey(true);
@@ -213,6 +225,10 @@ namespace MazeGame
             Console.WriteLine("You stand at a hallway");
             Console.WriteLine("What would you like to do?");
             Console.WriteLine("Walk    -     Look Around");
+
+            Random chance = new Random();
+            int success = chance.Next(1, 21);
+
             string input = Console.ReadLine().ToLower().Trim();
 
             if (input.Contains("walk"))
@@ -224,11 +240,30 @@ namespace MazeGame
             }
             else if (input.Contains("look"))
             {
-                Console.WriteLine("You look around and notice some holes in the ground");
+                if (success != 1)
+                {
+                    Console.WriteLine("You look around and notice some holes in the ground");
+                    Console.ReadKey(true);
+                    Console.WriteLine("You jump the trap and take no damage.");
+                    Console.ReadKey(true);
+                    EncounterType();
+                }
+                else
+                {
+                    Console.WriteLine("You attempt to jump over the trap");
+                    Console.ReadKey(true);
+                    Console.WriteLine("But you don't get enough speed get your foot impaled");
+                    Console.WriteLine("And take 20 damage");
+                    Console.ReadKey(true);
+                    EncounterType();
+                }
+            }
+            else
+            {
+                Console.WriteLine("Wrong input");
+                Console.WriteLine("Press any key to try again");
                 Console.ReadKey(true);
-                Console.WriteLine("You jump the trap and take no damage.");
-                Console.ReadKey(true);
-                EncounterType();
+                SpikeTrap();
             }
         }
 
@@ -238,8 +273,9 @@ namespace MazeGame
             Console.WriteLine("You find an unknown potion");
             Console.WriteLine("What do you want to do with it?");
             Console.WriteLine("Drink   -   Leave it");
+            
             Random chance = new Random();
-            int success = chance.Next(1, 20);
+            int success = chance.Next(1, 21);
 
             string input = Console.ReadLine().ToLower().Trim();
             if (input.Contains("drink"))
@@ -264,7 +300,57 @@ namespace MazeGame
                     EncounterType();
                 }
             }
+            else if (input.Contains("leave"))
+            {
+                Console.WriteLine("You leave the potion");
+                Console.ReadKey(true);
+                EncounterType();
+            }
+            else
+            {
+                Console.WriteLine("Wrong input");
+                Console.WriteLine("Press any key to try again");
+                Console.ReadKey(true);
+                Lucky();
+            }
         }
+
+        static void JrjEncounter()
+        {
+            string[] differentItems = { "Potion of Health", "Plague" };
+            Random rndNumber = new Random();
+
+            int i = rndNumber.Next(differentItems.Length);
+
+            int health = 100;
+
+            Console.WriteLine("Health: " + health);
+
+            Console.WriteLine("You have met weird looking stranger. He want to give you a present.Do you accept it?\n[Y] or [N]");
+            string input = Console.ReadLine();
+
+            if (input.ToLower() == "y")
+            {
+                if (differentItems[i] == "Potion of Health")
+                {
+                    Console.WriteLine($"You got a {differentItems[i]} and increased your health ny 10");
+                    health = health + 10;
+                }
+                else
+                {
+                    Console.WriteLine($"You got a {differentItems[i]} and took 20 damage!");
+                    health = health - 20;
+                }
+            }
+            else
+            {
+                Console.WriteLine("You like playing it safe and move on!");
+            }
+
+            Console.WriteLine("Health: " + health);
+        }
+
+        // User Interface
         static void GuiDrawLine(int[] Maze, int line)
         {
             ConsoleColor[] Color = { ConsoleColor.Green, ConsoleColor.Red, ConsoleColor.Cyan };
@@ -313,7 +399,7 @@ namespace MazeGame
                             1, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
                             1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                            };
-            
+
             Console.WriteLine("\t╔══════════════════════════════════════════════════════╗");
             Console.Write("\t║"); GuiDrawLine(Maze, 0); Console.WriteLine("║");
             Console.Write("\t║"); GuiDrawLine(Maze, 1); Console.WriteLine("║");
@@ -345,41 +431,6 @@ namespace MazeGame
             Console.WriteLine("\t╚══════════════════════════════════════════════════════╝");
 
             Console.ReadLine();
-        }
-        private static void GameMenu ()
-        {
-            Console.WriteLine("Test af forskellige tasks");
-            Console.WriteLine("Brug: 1, 2, 3, 4");
-            int testInput = int.Parse(Console.ReadLine());
-
-            switch (testInput)
-            {
-                case 1:
-                    {
-
-                        break;
-                    }
-                case 2:
-                    {
-
-                        break;
-                    }
-                case 3:
-                    {
-                        EncounterType();
-                        break;
-                    }
-                case 4:
-                    {
-                        Gui();
-                        break;
-                    }
-                default:
-                    {
-                        Console.WriteLine("Wrong input");
-                        break;
-                    }
-            }
         }
 
     }
