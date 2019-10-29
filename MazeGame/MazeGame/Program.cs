@@ -9,6 +9,40 @@ namespace MazeGame
         {
             GameMenu();
         }
+        static void jrjEncounter()
+        {
+            string[] differentItems = { "Potion of Health", "Plague" };
+            Random rndNumber = new Random();
+
+            int i = rndNumber.Next(differentItems.Length);
+
+            int health = 100;
+
+            Console.WriteLine("Health: " + health);
+
+            Console.WriteLine("You have met weird looking stranger. He want to give you a present.Do you accept it?\n[Y] or [N]");
+            string input = Console.ReadLine();
+
+            if (input.ToLower() == "y")
+            {
+                if (differentItems[i] == "Potion of Health")
+                {
+                    Console.WriteLine($"You got a {differentItems[i]} and increased your health ny 10");
+                    health = health + 10;
+                }
+                else
+                {
+                    Console.WriteLine($"You got a {differentItems[i]} and took 20 damage!");
+                    health = health - 20;
+                }
+            }
+            else
+            {
+                Console.WriteLine("You like playing it safe and move on!");
+            }
+
+            Console.WriteLine("Health: " + health);
+        }
 
         private static void EncounterType ()
         {
