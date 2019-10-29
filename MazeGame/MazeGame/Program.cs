@@ -316,7 +316,6 @@ namespace MazeGame
                 Lucky();
             }
         }
-
         private static void LeverFun()
         {
             Console.Clear();
@@ -505,5 +504,60 @@ namespace MazeGame
             Console.ReadLine();
         }
 
+
+        static bool AddItem(int itemId)
+        {
+            int maxSlots = 5;
+            int[] items = new int[maxSlots];
+
+            for (int i = 0; i < maxSlots; i++)
+            {
+                //check if slot is empty
+                if (items[i] == 0)
+                {
+                    //add item in empty slot
+                    items[i] = itemId;
+                    return true;
+                }
+            }
+            //inventory is full
+            return false;
+        }
+
+        static bool RemoveItem(int itemId)
+        {
+            int maxSlots = 5;
+            int[] items = new int[maxSlots];
+
+            for (int i = 0; i < maxSlots; i++)
+            {
+                //checks each slot for the matching item id  
+                if (items[i] == itemId)
+                {
+                    //remove item from slot
+                    items[i] = 0;
+                    return true;
+                }
+            }
+            //item doesnt exist in inventory 
+            return false;
+        }
+
+        static bool CheckItemInInventory(int itemId)
+        {
+            int maxSlots = 5;
+            int[] items = new int[maxSlots];
+
+            for (int i = 0; i < maxSlots; i++)
+            {
+                //
+                if (items[i] == itemId)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }
