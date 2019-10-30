@@ -16,5 +16,6 @@ Jonas: Stats & subtracted stats efter encounter
 Emilie: Inventory & Items og integrering
 
 Kennie: GUI, bug med movement når man holder knappen nede
+Goaaaaaaaaaaaal
 
 René: Maze design, encounter og stats integrering
