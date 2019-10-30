@@ -6,7 +6,7 @@ namespace MazeGame
     {
         public static int[] playerP = { 2, 3 };
         public static int steps = 0;
-        public static int[] stats = { 100, 20, 40, 10 }; //health, luck , Defence/armor, Intelligence,  
+        public static int[] stats = { 100, 20, 50, 40 }; // health, luck, armor, intelligence
         public static int maxSlots = 5;
         public static int[] items = new int[maxSlots];
 
@@ -14,7 +14,7 @@ namespace MazeGame
         static void Main(string[] args)
         {
             Gui();
-        }
+        }
 
 
         // Testing area for our codes
@@ -445,13 +445,9 @@ namespace MazeGame
                     Console.WriteLine("Press any key to try again");
                     Console.ReadKey(true);
                     LeverFun();
-                }            }        }
-        static void WeirdStranger()        {            string[] differentItems = { "Potion of Health", "Plague" };            Random rndNumber = new Random();            int i = rndNumber.Next(differentItems.Length);            Console.WriteLine("You have met weird looking stranger. He wants to give you a present.Do you accept it?\n[Y] or [N]");            string input = Console.ReadLine();            if (input.ToLower() == "y")            {                if (differentItems[i] == "Potion of Health")                {                    Console.WriteLine($"You got a {differentItems[i]} and increased your health by 10");                    Console.ReadKey(true);                    if (stats[0] >= 100)
-                    {
-                        Console.WriteLine("Your HP can't go higher than 100");
-                        Console.ReadKey(true);
-                        Gui();
-                    }                    Gui();                }                else                {                    Console.WriteLine($"You got a {differentItems[i]} and took 20 damage!");                    Console.ReadKey(true);                    stats[0] -= 20;                    Gui();                }            }            else            {                Console.WriteLine("You like playing it safe and move on!");                Console.ReadKey(true);                Gui();            }            //Console.WriteLine("Health: " + health);        }
+                }
+            }
+        }
 
         static void WeirdStranger()
         {
@@ -466,12 +462,19 @@ namespace MazeGame
                 {
                     Console.WriteLine($"You got a {differentItems[i]} and increased your health by 10");
                     Console.ReadKey(true);
+                    if (stats[0] >= 100)
+                    {
+                        Console.WriteLine("Your HP can't go higher than 100");
+                        Console.ReadKey(true);
+                        Gui();
+                    }
                     Gui();
                 }
                 else
                 {
                     Console.WriteLine($"You got a {differentItems[i]} and took 20 damage!");
                     Console.ReadKey(true);
+                    stats[0] -= 20;
                     Gui();
                 }
             }
@@ -485,7 +488,39 @@ namespace MazeGame
         }
 
         // User Interface
-        static void GuiDrawLine(int[] Maze, int line)        {            Console.BackgroundColor = ConsoleColor.Gray;            int i = 1 * line * 56 ;            while (i < 1 * line * 56 + 56)            {                //Console.BackgroundColor = Color[2];                //Console.ForegroundColor = Color[1];                //Console.Write(Maze[i + line * 56]);                switch (Maze[i])                {                    case 0:                        {                            //Pathway                            Console.Write(" ");                            break;                        }                    case 1:                        {                            //Border wall                            Console.ForegroundColor = ConsoleColor.DarkBlue;                            Console.Write("█");                            Console.ForegroundColor = ConsoleColor.White;                            break;                        }                    case 2:                        {                            //Wall                            Console.ForegroundColor = ConsoleColor.Red;                            Console.Write("▓");                            Console.ForegroundColor = ConsoleColor.White;                            break;                        }
+        static void GuiDrawLine(int[] Maze, int line)
+        {
+            Console.BackgroundColor = ConsoleColor.Gray;
+            int i = 1 * line * 56;
+            while (i < 1 * line * 56 + 56)
+            {
+                //Console.BackgroundColor = Color[2];
+                //Console.ForegroundColor = Color[1];
+                //Console.Write(Maze[i + line * 56]);
+                switch (Maze[i])
+                {
+                    case 0:
+                        {
+                            //Pathway
+                            Console.Write(" ");
+                            break;
+                        }
+                    case 1:
+                        {
+                            //Border wall
+                            Console.ForegroundColor = ConsoleColor.DarkBlue;
+                            Console.Write("█");
+                            Console.ForegroundColor = ConsoleColor.White;
+                            break;
+                        }
+                    case 2:
+                        {
+                            //Wall
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write("▓");
+                            Console.ForegroundColor = ConsoleColor.White;
+                            break;
+                        }
                     case 3:
                         {
                             //Bush
@@ -518,11 +553,26 @@ namespace MazeGame
                             Console.BackgroundColor = ConsoleColor.Gray;
                             break;
                         }
-                    case 7:                        {
+                    case 7:
+                        {
                             Console.BackgroundColor = ConsoleColor.Black;
-                            Console.Write("░");                            Console.BackgroundColor = ConsoleColor.Gray;                            break;
-                        }                    default:                        {                            Console.Write(" ");                            break;                        }                }                i += 1;            }            Console.BackgroundColor = ConsoleColor.Black;        }
-        static void Gui()        {            int[] Maze = {  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                            Console.Write("░");
+                            Console.BackgroundColor = ConsoleColor.Gray;
+                            break;
+                        }
+                    default:
+                        {
+                            Console.Write(" ");
+                            break;
+                        }
+                }
+                i += 1;
+            }
+            Console.BackgroundColor = ConsoleColor.Black;
+        }
+        static void Gui()
+        {
+            int[] Maze = {  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                             1, 7, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 2, 3, 3, 3, 3, 3, 0, 0, 2, 0, 0, 0, 0, 2, 2, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 4, 1,
                             1, 3, 2, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 0, 2, 0, 0, 2, 3, 3, 3, 3, 3, 0, 0, 2, 0, 2, 2, 0, 0, 2, 2, 0, 2, 2, 2, 2, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 2, 3, 1,
                             1, 3, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 2, 2, 2, 0, 3, 3, 3, 0, 2, 0, 2, 0, 0, 2, 2, 0, 0, 0, 0, 2, 3, 2, 3, 2, 0, 2, 2, 0, 0, 0, 2, 6, 6, 6, 2, 0, 2, 3, 1,
