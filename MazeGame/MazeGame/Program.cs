@@ -3,8 +3,10 @@ using System;
 namespace MazeGame
 {
     class Program
-    { 
-
+    {
+        public static int[] playerP = { 2, 2 };        public static int maxSlots = 5;
+        public static int[] items = new int[maxSlots];
+
         static void Main(string[] args)
         {
             GameMenu();
@@ -387,7 +389,7 @@ namespace MazeGame
         static void WeirdStranger()        {            string[] differentItems = { "Potion of Health", "Plague" };            Random rndNumber = new Random();            int i = rndNumber.Next(differentItems.Length);            Console.WriteLine("You have met weird looking stranger. He wants to give you a present.Do you accept it?\n[Y] or [N]");            string input = Console.ReadLine();            if (input.ToLower() == "y")            {                if (differentItems[i] == "Potion of Health")                {                    Console.WriteLine($"You got a {differentItems[i]} and increased your health by 10");                }                else                {                    Console.WriteLine($"You got a {differentItems[i]} and took 20 damage!");                }            }            else            {                Console.WriteLine("You like playing it safe and move on!");            }            //Console.WriteLine("Health: " + health);        }
 
         // User Interface
-        {
+        
         static void GuiDrawLine(int[] Maze, int line)        {            int i = 1 * line * 56 ;            while (i < 1 * line * 56 + 56)            {                //Console.BackgroundColor = Color[2];                //Console.ForegroundColor = Color[1];                //Console.Write(Maze[i + line * 56]);                switch (Maze[i])                {                    case 0:                        {                            Console.Write(" ");                            break;                        }                    case 1:                        {                            Console.Write("█");                            break;                        }                    case 2:                        {                            Console.Write("▓");                            break;                        }
                     case 5:                        {
                             Console.Write("¤");
@@ -464,7 +466,7 @@ namespace MazeGame
             }
             else if (key.Key == ConsoleKey.E) 
             { 
-
+                //inventory 
             }
             else if (key.Key == ConsoleKey.Enter || key.Key == ConsoleKey.Spacebar)
             {
@@ -474,11 +476,12 @@ namespace MazeGame
         }
 
         // Inventory System, Adding an item and removing it 
+        
+
+        
         static bool AddItem(int itemId)
         {
-            int maxSlots = 5;
-            int[] items = new int[maxSlots];
-
+            
             for (int i = 0; i < maxSlots; i++)
             {
                 //check if slot is empty
@@ -495,8 +498,6 @@ namespace MazeGame
 
         static bool RemoveItem(int itemId)
         {
-            int maxSlots = 5;
-            int[] items = new int[maxSlots];
 
             for (int i = 0; i < maxSlots; i++)
             {
