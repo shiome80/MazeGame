@@ -100,9 +100,10 @@ namespace MazeGame
 
             Console.WriteLine("You stand before a seemingly buttomless pit.");
             Console.WriteLine("What do you do?");
+            Console.WriteLine("1. Try jump over \n2. Kill yourself");
             string userInput = Console.ReadLine();
 
-            if (userInput.ToLower().Contains("jump"))
+            if (userInput.ToLower().Contains("1"))
             {
                 you = chance.Next(1, 100);
                 if (you >= 25)
@@ -117,7 +118,17 @@ namespace MazeGame
                     Console.ReadKey(true);
                     GameMenu();
                 }
-            } 
+            }
+            else if (userInput.ToLower().Trim().Contains("2"))
+            {
+                Console.WriteLine("I mean.... sure.. go ahead");
+                Console.ReadKey(true);
+                Console.WriteLine("Guess you die...");
+                Console.ReadKey(true);
+                Console.WriteLine("Press enter to start over");
+                Console.ReadKey(true);
+                Reset();
+            }
             else
             {
                 Console.WriteLine("Wrong input");
@@ -244,9 +255,9 @@ namespace MazeGame
             }
             else if (input.Contains("2"))
             {
+                Console.WriteLine("You look around and notice some holes in the ground");
                 if (success != 1)
                 {
-                    Console.WriteLine("You look around and notice some holes in the ground");
                     Console.ReadKey(true);
                     Console.WriteLine("You jump the trap and take no damage.");
                     Console.ReadKey(true);
