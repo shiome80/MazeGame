@@ -422,6 +422,13 @@ namespace MazeGame
                             Console.Write("¤");
                             Console.ForegroundColor = ConsoleColor.White;
                             break;
+                        }
+                    case 6:                        {
+                            //Lava
+                            Console.BackgroundColor = ConsoleColor.DarkRed;
+                            Console.Write(" ");
+                            Console.BackgroundColor = ConsoleColor.Gray;
+                            break;
                         }                    default:                        {                            Console.Write(" ");                            break;                        }                }                i += 1;            }            Console.BackgroundColor = ConsoleColor.Black;        }
         static void Gui()        {            int[] Maze = {  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                             1, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 2, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 4, 1,
@@ -443,8 +450,8 @@ namespace MazeGame
                             1, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 0, 0, 2, 0, 0, 0, 1,
                             1, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 2, 2, 2, 2, 2, 0, 2, 2, 2, 0, 2, 0, 1,
                             1, 0, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 1,
-                            1, 0, 2, 0, 2, 2, 2, 2, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 0, 1,
-                            1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 1,
+                            1, 0, 2, 0, 2, 2, 2, 2, 2, 0, 0, 0, 2, 0, 2, 0, 6, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 0, 1,
+                            1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 2, 6, 6, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 1,
                             1, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 0, 2, 0, 1,
                             1, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 2, 2, 2, 0, 2, 0, 2, 3, 2, 3, 2, 0, 2, 0, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 0, 0, 2, 0, 2, 2, 2, 0, 1,
                             1, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 1,
@@ -459,6 +466,7 @@ namespace MazeGame
             //3 = busk
             //4 = mål
             //0 = pathway
+            if (stats[0] < 1) { Dead(); }
             Console.WriteLine(Maze.Length);
             Maze[(playerP[0] - 1 ) + ((31 - playerP[1]) * 56)] = 5;
             Console.Clear();            GuiDrawLine(Maze, 0); Console.WriteLine("\t\t\t\tHEALTH");            GuiDrawLine(Maze, 1);
@@ -488,28 +496,69 @@ namespace MazeGame
             {
                 if (Maze[(playerP[0] - 1) + ((31 - (playerP[1] + 1)) * 56)] == 0)
                 {
-                    playerP[1] += 1;
+                    if (Maze[(playerP[0] - 1) + ((31 - (playerP[1] + 1)) * 56)] == 6)
+                    {
+                        playerP[1] += 1;
+                        steps += 1;
+                        stats[0] -= 5;
+                    }
+                    else
+                    {
+                        playerP[1] += 1;
+                        steps += 1;
+                    }
                 }
             }
             else if (key.Key == ConsoleKey.DownArrow)
             {
                 if (Maze[(playerP[0] - 1) + ((31 - (playerP[1] - 1)) * 56)] == 0)
                 {
-                    playerP[1] -= 1;
+                    if (Maze[(playerP[0] - 1) + ((31 - (playerP[1] - 1)) * 56)] == 6)
+                    {
+                        playerP[1] -= 1;
+                        steps += 1;
+                        stats[0] -= 5;
+                    }
+                    else
+                    {
+                        playerP[1] -= 1;
+                        steps += 1;
+                    }
                 }
             }
             else if (key.Key == ConsoleKey.RightArrow)
             {
                 if (Maze[(playerP[0]) + ((31 - (playerP[1])) * 56)] == 0)
                 {
-                    playerP[0] += 1;
+                    if (Maze[(playerP[0]) + ((31 - (playerP[1])) * 56)] == 6)
+                    {
+                        playerP[0] += 1;
+                        steps += 1;
+                        stats[0] -= 5;
+                    }
+                    else
+                    {
+                        playerP[0] += 1;
+                        steps += 1;
+                    }
                 }
             }
             else if (key.Key == ConsoleKey.LeftArrow)
             {
                 if (Maze[(playerP[0] - 2) + ((31 - (playerP[1])) * 56)] == 0)
                 {
-                    playerP[0] -= 1;
+                    if (Maze[(playerP[0] - 2) + ((31 - (playerP[1])) * 56)] ==6)
+                    {
+                        playerP[0] -= 1;
+                        steps += 1;
+                        stats[0] -= 5;
+                    }
+                    else
+                    {
+                        playerP[0] -= 1;
+                        steps += 1;
+                    }
+                    
                 }
             }
             else if (key.Key == ConsoleKey.Escape)
@@ -539,6 +588,14 @@ namespace MazeGame
                 Gui();
             }
         }
+        static void Dead()
+        {
+            Console.Clear();
+            Console.WriteLine("You died!!!");
+            Console.WriteLine("Press \"ENTER\" to try again");
+            Console.ReadLine();
+            Reset();
+        }
 
         static void Win()
         {
@@ -553,6 +610,7 @@ namespace MazeGame
             playerP[0] = 2;
             playerP[1] = 2;
             steps = 0;
+            stats[0] = 100;
             Gui();
         }
 
