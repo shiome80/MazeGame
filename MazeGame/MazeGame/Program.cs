@@ -66,7 +66,12 @@ namespace MazeGame
                         DeathTrap();
                         break;
                     }
-                case int n when (n <= 8 && n >= 2):
+                case int n when (n <= 2 && n >= 4):
+                    {
+                        LeverFun();
+                        break;
+                    }
+                case int n when (n <= 8 && n >= 5):
                     {
                         Gui();
                         break;
@@ -375,7 +380,7 @@ namespace MazeGame
             {
                 Console.WriteLine("You walk across the odd looking tiles");
                 Console.ReadKey(true);
-                if (success == 1)
+                if (success <= 10)
                 {
                     Console.WriteLine("This triggers a hidden trap \nAn arrow flies out of the wall and hits your arm \nYou take 10 damage");
                     Console.ReadKey(true);
@@ -401,7 +406,7 @@ namespace MazeGame
                     Console.ReadKey(true);
                     Gui();
                 }
-                else if (success > 1 && success < 20)
+                else if (success > 1 && success < 15)
                 {
                     Console.WriteLine("You don't notice anything happening \nUntil a stretching arm with a boxing glove hits you hard in the nuts");
                     Console.WriteLine("You take 20 damage and leave your masculinity");
@@ -409,7 +414,7 @@ namespace MazeGame
                     stats[0] -= 20;
                     Gui();
                 }
-                else if (success == 20)
+                else if (success > 15)
                 {
                     Console.WriteLine("The lever opens a hidden door");
                     Console.ReadKey(true);
