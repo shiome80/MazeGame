@@ -526,7 +526,7 @@ namespace MazeGame
             {
 
             }
-            int[] goal = { 53, 28 };
+            int[] goal = { 55, 29 };
             if (steps == 4)
             {
                 steps = 0 - new Random().Next(0, 3);
