@@ -12,7 +12,7 @@ namespace MazeGame
 
         static void Main(string[] args)
         {
-            GameMenu();
+            Gui();
         }
 
         // Testing area for our codes
@@ -440,7 +440,7 @@ namespace MazeGame
                     }                    Gui();                }                else                {                    Console.WriteLine($"You got a {differentItems[i]} and took 20 damage!");                    Console.ReadKey(true);                    stats[0] -= 20;                    Gui();                }            }            else            {                Console.WriteLine("You like playing it safe and move on!");                Console.ReadKey(true);                Gui();            }            //Console.WriteLine("Health: " + health);        }
 
         // User Interface
-        static void GuiDrawLine(int[] Maze, int line)        {            Console.BackgroundColor = ConsoleColor.Gray;            int i = 1 * line * 56 ;            while (i < 1 * line * 56 + 56)            {                //Console.BackgroundColor = Color[2];                //Console.ForegroundColor = Color[1];                //Console.Write(Maze[i + line * 56]);                switch (Maze[i])                {                    case 0:                        {                            //Pathway                            Console.Write(" ");                            break;                        }                    case 1:                        {                            //Border wall                            Console.ForegroundColor = ConsoleColor.DarkRed;                            Console.Write("█");                            Console.ForegroundColor = ConsoleColor.White;                            break;                        }                    case 2:                        {                            //Wall                            Console.ForegroundColor = ConsoleColor.Red;                            Console.Write("▓");                            Console.ForegroundColor = ConsoleColor.White;                            break;                        }
+        static void GuiDrawLine(int[] Maze, int line)        {            Console.BackgroundColor = ConsoleColor.Gray;            int i = 1 * line * 56 ;            while (i < 1 * line * 56 + 56)            {                //Console.BackgroundColor = Color[2];                //Console.ForegroundColor = Color[1];                //Console.Write(Maze[i + line * 56]);                switch (Maze[i])                {                    case 0:                        {                            //Pathway                            Console.Write(" ");                            break;                        }                    case 1:                        {                            //Border wall                            Console.ForegroundColor = ConsoleColor.DarkBlue;                            Console.Write("█");                            Console.ForegroundColor = ConsoleColor.White;                            break;                        }                    case 2:                        {                            //Wall                            Console.ForegroundColor = ConsoleColor.Red;                            Console.Write("▓");                            Console.ForegroundColor = ConsoleColor.White;                            break;                        }
                     case 3:
                         {
                             //Bush
