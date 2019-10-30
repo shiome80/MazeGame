@@ -7,6 +7,8 @@ namespace MazeGame
         public static int[] playerP = { 2, 3 };
         public static int steps = 0;
         public static int[] stats = { 100, 20 };
+        public static int maxSlots = 5;
+        public static int[] items = new int [maxSlots];
 
         static void Main(string[] args)
         {
@@ -52,7 +54,7 @@ namespace MazeGame
             }
         }
 
-        private static void EncounterType ()
+        private static void EncounterType()
         {
             Random encounterPick = new Random();
             int newFoe = encounterPick.Next(1, 21);
@@ -457,6 +459,13 @@ namespace MazeGame
                             Console.Write("¤");
                             Console.ForegroundColor = ConsoleColor.White;
                             break;
+                        }
+                    case 6:                        {
+                            //Lava
+                            Console.BackgroundColor = ConsoleColor.DarkRed;
+                            Console.Write(" ");
+                            Console.BackgroundColor = ConsoleColor.Gray;
+                            break;
                         }                    default:                        {                            Console.Write(" ");                            break;                        }                }                i += 1;            }            Console.BackgroundColor = ConsoleColor.Black;        }
         static void Gui()        {            int[] Maze = {  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                             1, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 2, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 4, 1,
@@ -478,8 +487,8 @@ namespace MazeGame
                             1, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 0, 0, 2, 0, 0, 0, 1,
                             1, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 2, 2, 2, 2, 2, 0, 2, 2, 2, 0, 2, 0, 1,
                             1, 0, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 1,
-                            1, 0, 2, 0, 2, 2, 2, 2, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 0, 1,
-                            1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 1,
+                            1, 0, 2, 0, 2, 2, 2, 2, 2, 0, 0, 0, 2, 0, 2, 0, 6, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 0, 1,
+                            1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 2, 6, 6, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 1,
                             1, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 0, 2, 0, 1,
                             1, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 2, 2, 2, 0, 2, 0, 2, 3, 2, 3, 2, 0, 2, 0, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 0, 0, 2, 0, 2, 2, 2, 0, 1,
                             1, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 1,
@@ -494,6 +503,7 @@ namespace MazeGame
             //3 = busk
             //4 = mål
             //0 = pathway
+            if (stats[0] < 1) { Dead(); }
             Console.WriteLine(Maze.Length);
             Maze[(playerP[0] - 1 ) + ((31 - playerP[1]) * 56)] = 5;
             Console.Clear();            GuiDrawLine(Maze, 0); Console.WriteLine("\t\t\t\tHEALTH");            GuiDrawLine(Maze, 1);
@@ -523,41 +533,78 @@ namespace MazeGame
             {
                 if (Maze[(playerP[0] - 1) + ((31 - (playerP[1] + 1)) * 56)] != 1 & Maze[(playerP[0] - 1) + ((31 - (playerP[1] + 1)) * 56)] != 2)
                 {
-                    playerP[1] += 1;
-                    steps += 1;
+                    if (Maze[(playerP[0] - 1) + ((31 - (playerP[1] + 1)) * 56)] == 6)
+                    {
+                        playerP[1] += 1;
+                        steps += 1;
+                        stats[0] -= 5;
+                    }
+                    else
+                    {
+                        playerP[1] += 1;
+                        steps += 1;
+                    }
                 }
             }
             else if (key.Key == ConsoleKey.DownArrow)
             {
                 if (Maze[(playerP[0] - 1) + ((31 - (playerP[1] - 1)) * 56)] != 1 & Maze[(playerP[0] - 1) + ((31 - (playerP[1] - 1)) * 56)] != 2)
                 {
-                    playerP[1] -= 1;
-                    steps += 1;
+                    if (Maze[(playerP[0] - 1) + ((31 - (playerP[1] - 1)) * 56)] == 6)
+                    {
+                        playerP[1] -= 1;
+                        steps += 1;
+                        stats[0] -= 5;
+                    }
+                    else
+                    {
+                        playerP[1] -= 1;
+                        steps += 1;
+                    }
                 }
             }
             else if (key.Key == ConsoleKey.RightArrow)
             {
                 if (Maze[(playerP[0]) + ((31 - (playerP[1])) * 56)] != 1 & Maze[(playerP[0]) + ((31 - (playerP[1])) * 56)] != 2)
                 {
-                    playerP[0] += 1;
-                    steps += 1;
+                    if (Maze[(playerP[0]) + ((31 - (playerP[1])) * 56)] == 6)
+                    {
+                        playerP[0] += 1;
+                        steps += 1;
+                        stats[0] -= 5;
+                    }
+                    else
+                    {
+                        playerP[0] += 1;
+                        steps += 1;
+                    }
                 }
             }
             else if (key.Key == ConsoleKey.LeftArrow)
             {
                 if (Maze[(playerP[0] - 2) + ((31 - (playerP[1])) * 56)] != 1 & Maze[(playerP[0] - 2) + ((31 - (playerP[1])) * 56)] != 2)
                 {
-                    playerP[0] -= 1;
-                    steps += 1;
+                    if (Maze[(playerP[0] - 2) + ((31 - (playerP[1])) * 56)] ==6)
+                    {
+                        playerP[0] -= 1;
+                        steps += 1;
+                        stats[0] -= 5;
+                    }
+                    else
+                    {
+                        playerP[0] -= 1;
+                        steps += 1;
+                    }
+                    
                 }
             }
             else if (key.Key == ConsoleKey.Escape)
             {
-                
-            }
-            else if (key.Key == ConsoleKey.E) 
-            { 
 
+            }
+            else if (key.Key == ConsoleKey.E)
+            {
+                Inventory();
             }
             else if (key.Key == ConsoleKey.Enter || key.Key == ConsoleKey.Spacebar)
             {
@@ -578,6 +625,15 @@ namespace MazeGame
                 Gui();
             }
         }
+        static void Dead()
+        {
+            Console.Clear();
+            Console.WriteLine("You died!!!");
+            Console.WriteLine("Press \"ENTER\" to try again");
+            Console.ReadLine();
+            Reset();
+        }
+
         static void Win()
         {
             Console.Clear();
@@ -591,14 +647,20 @@ namespace MazeGame
             playerP[0] = 2;
             playerP[1] = 2;
             steps = 0;
+            stats[0] = 100;
             Gui();
+        }
+
+        // Inventory System, Adding an item and removing it 
+
+        static void Inventory()
+        {
+            CheckItemsInInventory(); 
         }
 
         //Items and inventory
         static bool AddItem(int itemId)
         {
-            int maxSlots = 5;
-            int[] items = new int[maxSlots];
 
             for (int i = 0; i < maxSlots; i++)
             {
@@ -616,8 +678,6 @@ namespace MazeGame
 
         static bool RemoveItem(int itemId)
         {
-            int maxSlots = 5;
-            int[] items = new int[maxSlots];
 
             for (int i = 0; i < maxSlots; i++)
             {
@@ -633,22 +693,19 @@ namespace MazeGame
             return false;
         }
 
-        static bool CheckItemInInventory(int itemId)
+        
+        static void CheckItemsInInventory()
         {
-            int maxSlots = 5;
-            int[] items = new int[maxSlots];
+            //List of items in array that'll be printed to the console 
 
-            for (int i = 0; i < maxSlots; i++)
-            {
-                //
-                if (items[i] == itemId)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            string[] inventoryItems = { "Potion of Health", "Bag of Holding", "50 Gold Coins" };
+            Console.Clear();
+            Console.WriteLine(inventoryItems[0]);
+            Console.WriteLine(inventoryItems[1]);
+            Console.WriteLine(inventoryItems[2]);
+            Console.ReadKey();
         }
+
     }
 }
 
