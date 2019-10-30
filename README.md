@@ -4,21 +4,17 @@ TASKS:
 + Menu
 + GUI
 + Encounters
++ Items / Inventory
 
-- Maze Generator - Gui først
 - Player stats / Scoreboards / Tick Counter
-- Items / Inventory
-
+- Make it talk
 
 Assignments for today:
 
-Jonas: Stats & Encounter polish
-pass stats igennem methods og return subtracted stats
+Jonas: Stats & subtracted stats efter encounter
 
-Emilie: Inventory & Items
-PUSH
+Emilie: Inventory & Items og integrering
 
-Kennie: GUI / Maze & Movement
+Kennie: GUI, bug med movement når man holder knappen nede
 
-René: Bugfix of encounter & adding Mads on Github
-Mazedesign, change end of encounters to maze
+René: Maze design, encounter og stats integrering
