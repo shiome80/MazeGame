@@ -4,12 +4,11 @@ namespace MazeGame
 {
     class Program
     {
-
-        public static int[] stats = { 100, 20 }; 
-        public static int[] items = new int[maxSlots];
         public static int[] playerP = { 2, 3 };
         public static int steps = 0;
         public static int[] stats = { 100, 20 };
+        public static int maxSlots = 5;
+        public static int[] items = new int [maxSlots];
 
         static void Main(string[] args)
         {
@@ -421,8 +420,9 @@ namespace MazeGame
                             //Player
                             Console.ForegroundColor = ConsoleColor.DarkBlue;
                             Console.Write("¤");
+                            Console.ForegroundColor = ConsoleColor.White;
                             break;
-                        }                    default:                        {                            Console.Write(" ");                            break;                        }                }                i += 1;            }        }
+                        }                    default:                        {                            Console.Write(" ");                            break;                        }                }                i += 1;            }            Console.BackgroundColor = ConsoleColor.Black;        }
         static void Gui()        {            int[] Maze = {  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                             1, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 2, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 4, 1,
                             1, 0, 2, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 0, 2, 2, 0, 2, 2, 2, 2, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 1,
@@ -540,6 +540,22 @@ namespace MazeGame
             }
         }
 
+        static void Win()
+        {
+            Console.Clear();
+            Console.WriteLine("You won!!!");
+            Console.WriteLine("Press \"ENTER\" to start again");
+            Console.ReadLine();
+            Reset();
+        }
+        static void Reset()
+        {
+            playerP[0] = 2;
+            playerP[1] = 2;
+            steps = 0;
+            Gui();
+        }
+
         // Inventory System, Adding an item and removing it 
 
         static void Inventory()
@@ -586,6 +602,7 @@ namespace MazeGame
         static void CheckItemsInInventory()
         {
             //List of items in array that'll be printed to the console 
+
             string[] inventoryItems = { "Potion of Health", "Bag of Holding", "50 Gold Coins" };
 
             foreach (var item in inventoryItems)
