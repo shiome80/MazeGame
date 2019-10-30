@@ -6,6 +6,7 @@ namespace MazeGame
     {
         public static int[] playerP = { 2, 2 };
         public static int steps = 0;
+        public static int[] stats = { 100, 20 };
 
         static void Main(string[] args)
         {
@@ -449,6 +450,34 @@ namespace MazeGame
                             1, 0, 2, 0, 0, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 2, 0, 0, 0, 2, 0, 2, 2, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 0, 0, 0, 1,
                             1, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 2, 2, 0, 0, 0, 2, 0, 1,
                             1, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 2, 2, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 1,
+                            1, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 2, 2, 0, 0, 0, 2, 2, 0, 0, 2, 2, 0, 1,
+                            1, 0, 2, 2, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 2, 0, 0, 2, 0, 2, 0, 0, 2, 2, 0, 0, 2, 1,
+                            1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 2, 0, 0, 2, 0, 2, 0, 0, 2, 2, 0, 0, 2, 1,
+                            1, 0, 2, 2, 2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 2, 2, 0, 0, 0, 2, 2, 0, 0, 2, 2, 0, 1,
+                            1, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 1,
+                            1, 0, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 1,
+                            1, 2, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 0, 2, 0, 0, 2, 0, 0, 1,
+                            1, 0, 2, 0, 0, 0, 0, 0, 2, 3, 0, 0, 2, 0, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 0, 1,
+                            1, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 2, 2, 0, 0, 0, 1,
+                            1, 0, 2, 0, 2, 2, 2, 0, 2, 2, 0, 2, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1,
+                            1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 2, 2, 0, 0, 2, 2, 2, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 0, 2, 2, 1,
+                            1, 0, 2, 2, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 2, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 2, 2, 1,
+                            1, 0, 0, 0, 2, 0, 0, 0, 0, 2, 2, 2, 2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1,
+                            1, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 2, 2, 0, 0, 0, 2, 0, 2, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 1,
+                            1, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 2, 0, 2, 0, 0, 0, 2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 1,
+                            1, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 2, 2, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 2, 2, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 2, 2, 2, 2, 0, 1,
+                            1, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 1,
+                            1, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 1,
+                            1, 0, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 1,
+                            1, 0, 2, 0, 2, 2, 2, 2, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 2, 2, 2, 0, 2, 0, 0, 2, 0, 0, 1,
+                            1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 1,
+                            1, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 1,
+                            1, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 1,
+                            1, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 2, 2, 0, 0, 0, 2, 2, 0, 0, 2, 2, 0, 1,
+                            1, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 2, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 2, 0, 0, 2, 0, 2, 0, 0, 2, 2, 0, 0, 2, 1,
+                            1, 0, 2, 0, 0, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 2, 0, 0, 2, 0, 2, 0, 0, 2, 2, 0, 0, 2, 1,
+                            1, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 2, 2, 0, 0, 0, 2, 2, 0, 0, 2, 2, 0, 1,
+                            1, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 2, 2, 0, 0, 0, 2, 2, 0, 0, 2, 2, 0, 1,
                             1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                            };
             //1 = ydre mur
@@ -458,7 +487,29 @@ namespace MazeGame
             //0 = pathway
             Console.WriteLine(Maze.Length);
             Maze[(playerP[0] - 1 ) + ((31 - playerP[1]) * 56)] = 5;
-            Console.Clear();            GuiDrawLine(Maze, 0);Console.WriteLine();            GuiDrawLine(Maze, 1); Console.WriteLine();            GuiDrawLine(Maze, 2); Console.WriteLine();            GuiDrawLine(Maze, 3); Console.WriteLine();            GuiDrawLine(Maze, 4); Console.WriteLine();            GuiDrawLine(Maze, 5); Console.WriteLine();            GuiDrawLine(Maze, 6); Console.WriteLine();            GuiDrawLine(Maze, 7); Console.WriteLine();            GuiDrawLine(Maze, 8); Console.WriteLine();            GuiDrawLine(Maze, 9); Console.WriteLine();            GuiDrawLine(Maze, 10); Console.WriteLine();            GuiDrawLine(Maze, 11); Console.WriteLine();            GuiDrawLine(Maze, 12); Console.WriteLine();            GuiDrawLine(Maze, 13); Console.WriteLine();            GuiDrawLine(Maze, 14); Console.WriteLine();            GuiDrawLine(Maze, 15); Console.WriteLine();            GuiDrawLine(Maze, 16); Console.WriteLine();            GuiDrawLine(Maze, 17); Console.WriteLine();            GuiDrawLine(Maze, 18); Console.WriteLine();            GuiDrawLine(Maze, 19); Console.WriteLine();            GuiDrawLine(Maze, 20); Console.WriteLine();            GuiDrawLine(Maze, 21); Console.WriteLine();            GuiDrawLine(Maze, 22); Console.WriteLine();            GuiDrawLine(Maze, 23); Console.WriteLine();            GuiDrawLine(Maze, 24); Console.WriteLine();            GuiDrawLine(Maze, 25); Console.WriteLine();            GuiDrawLine(Maze, 26); Console.WriteLine();            GuiDrawLine(Maze, 27); Console.WriteLine();            GuiDrawLine(Maze, 28); Console.WriteLine();            GuiDrawLine(Maze, 29); Console.Write("");            ConsoleKeyInfo key = Console.ReadKey();
+            Console.Clear();            GuiDrawLine(Maze, 0); Console.WriteLine("\t\t\t\tHEALTH");            GuiDrawLine(Maze, 1);
+            Console.Write("\t[");            int i = 0;            while (i < 51)
+            {
+                if(i > stats[0]/2)
+                {
+                    Console.BackgroundColor = ConsoleColor.Black;
+                }
+                else if (stats[0] / 2 < 20)
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                }
+                else if (stats[0] / 2 < 40)
+                {
+                    Console.BackgroundColor = ConsoleColor.Yellow;
+                }
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.Green;
+                }
+                Console.Write(" ");
+                i += 1;
+
+            }            Console.BackgroundColor = ConsoleColor.Black;            Console.Write("]");            Console.WriteLine();            GuiDrawLine(Maze, 2); Console.WriteLine();            GuiDrawLine(Maze, 3); Console.WriteLine("\tLuck\t{0}",stats[1]);            GuiDrawLine(Maze, 4); Console.WriteLine();            GuiDrawLine(Maze, 5); Console.WriteLine();            GuiDrawLine(Maze, 6); Console.WriteLine();            GuiDrawLine(Maze, 7); Console.WriteLine();            GuiDrawLine(Maze, 8); Console.WriteLine();            GuiDrawLine(Maze, 9); Console.WriteLine();            GuiDrawLine(Maze, 10); Console.WriteLine();            GuiDrawLine(Maze, 11); Console.WriteLine();            GuiDrawLine(Maze, 12); Console.WriteLine();            GuiDrawLine(Maze, 13); Console.WriteLine();            GuiDrawLine(Maze, 14); Console.WriteLine();            GuiDrawLine(Maze, 15); Console.WriteLine();            GuiDrawLine(Maze, 16); Console.WriteLine();            GuiDrawLine(Maze, 17); Console.WriteLine();            GuiDrawLine(Maze, 18); Console.WriteLine();            GuiDrawLine(Maze, 19); Console.WriteLine();            GuiDrawLine(Maze, 20); Console.WriteLine();            GuiDrawLine(Maze, 21); Console.WriteLine();            GuiDrawLine(Maze, 22); Console.WriteLine();            GuiDrawLine(Maze, 23); Console.WriteLine();            GuiDrawLine(Maze, 24); Console.WriteLine();            GuiDrawLine(Maze, 25); Console.WriteLine();            GuiDrawLine(Maze, 26); Console.WriteLine();            GuiDrawLine(Maze, 27); Console.WriteLine();            GuiDrawLine(Maze, 28); Console.WriteLine();            GuiDrawLine(Maze, 29); Console.Write("");            ConsoleKeyInfo key = Console.ReadKey();
             if (key.Key == ConsoleKey.UpArrow)
             {
                 if (Maze[(playerP[0] - 1) + ((31 - (playerP[1] + 1)) * 56)] != 1 & Maze[(playerP[0] - 1) + ((31 - (playerP[1] + 1)) * 56)] != 2)
