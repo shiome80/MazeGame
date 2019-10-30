@@ -63,17 +63,22 @@ namespace MazeGame
                         DeathTrap();
                         break;
                     }
-                case int n when (n <= 10 && n >= 2):
+                case int n when (n <= 8 && n >= 2):
+                    {
+                        Gui();
+                        break;
+                    }
+                case int n when (n <= 12 && n >= 9):
                     {
                         Goblin();
                         break;
                     }
-                case int n when (n <= 15 && n >= 10):
+                case int n when (n <= 17 && n >= 13):
                     {
                         TripWire();
                         break;
                     }
-                case int n when (n <= 19 && n >= 15):
+                case int n when (n == 19 || n == 18):
                     {
                         SpikeTrap();
                         break;
@@ -104,13 +109,13 @@ namespace MazeGame
                 {
                     Console.WriteLine("You succed jumping over the pit");
                     Console.ReadKey(true);
-                    EncounterType();
+                    Gui();
                 }
                 else
                 {
                     Console.WriteLine("You fail jumping the pit and fall to your death.");
                     Console.ReadKey(true);
-                    // Jump to Menu
+                    GameMenu();
                 }
             } 
             else
@@ -132,11 +137,10 @@ namespace MazeGame
             Console.WriteLine("You stand before a single goblin");
             Console.WriteLine("What do you want to do?");
             Console.WriteLine("");
-            Console.WriteLine("Attack");
-            Console.WriteLine("Befriend   -    Run away");
+            Console.WriteLine("1. Attack \n2. Befriend \n3. Run away");
                 
             input = Console.ReadLine().ToLower().Trim();
-            if (input.Contains("attack"))
+            if (input.Contains("1"))
             {
                 Console.WriteLine("You attack the goblin");
                 Console.WriteLine("");
@@ -146,7 +150,7 @@ namespace MazeGame
                 {
                     Console.WriteLine("and punch so hard crack his skull open, killing it instantly");
                     Console.ReadKey(true);
-                    EncounterType();
+                    Gui();
                 }
                 else if (chance == 1)
                 {
@@ -154,23 +158,23 @@ namespace MazeGame
                     Console.WriteLine("The goblin start beating you");
                     Console.WriteLine("You take 10 damage");
                     Console.ReadKey(true);
-                    EncounterType();
+                    Gui();
                 }
                 else
                 {
                     Console.WriteLine("You attack the goblin with your fist");
-                    Console.WriteLine("The goblin flees into the darkness");
+                    Console.WriteLine("The goblin gets scared and flees into the darkness");
                     Console.ReadKey(true);
-                    EncounterType();
+                    Gui();
                 }
             }
-            else if (input.Contains("run"))
+            else if (input.Contains("3"))
             {
                 Console.WriteLine("You can't run dumbass.. You're trapped in a maze..");
                 Console.ReadKey(true);
                 Goblin();
             }
-            else if (input.Contains("befriend"))
+            else if (input.Contains("2"))
             {
                 Console.WriteLine("You try to make the goblin your friend.");
                 Console.ReadKey(true);
@@ -179,16 +183,12 @@ namespace MazeGame
                 Console.WriteLine("The goblin gets scared and throws his dagger at you and runs away");
                 Console.WriteLine("You take 5 damage");
                 Console.ReadKey(true);
-                EncounterType();
-                // continue to next field
+                Gui();
             }
-            else
-            {
-                Console.WriteLine("Wrong input");
+            else
+            {                Console.WriteLine("Wrong input");
                 Console.WriteLine("Press any key to try again");
-                Console.ReadKey(true);
-                Goblin();
-            }
+                Console.ReadKey(true);                Goblin();            }
         }
 
         private static void TripWire()
@@ -205,21 +205,21 @@ namespace MazeGame
                 Console.WriteLine("You don't even notice it");
                 Console.WriteLine("You get a concussion and take 10 damage");
                 Console.ReadKey(true);
-                EncounterType();
+                Gui();
             }
             else if (success == 2)
             {
                 Console.WriteLine("You only just notice the wire and manage to break the fall");
                 Console.WriteLine("You take 5 damage");
                 Console.ReadKey(true);
-                EncounterType();
+                Gui();
             }
             else
             {
                 Console.WriteLine("You notice it easily and skip over it");
                 Console.WriteLine("Continue without taking any damage.");
                 Console.ReadKey(true);
-                EncounterType();
+                Gui();
             }
         }
 
@@ -228,21 +228,21 @@ namespace MazeGame
             Console.Clear();
             Console.WriteLine("You stand at a hallway");
             Console.WriteLine("What would you like to do?");
-            Console.WriteLine("Walk    -     Look Around");
+            Console.WriteLine("1. Walk \n2. Look Around");
 
             Random chance = new Random();
             int success = chance.Next(1, 21);
 
             string input = Console.ReadLine().ToLower().Trim();
 
-            if (input.Contains("walk"))
+            if (input.Contains("1"))
             {
                 Console.WriteLine("You continue walking only to trigger a spike trap in the floor");
                 Console.WriteLine("Taking 50 damage");
                 Console.ReadKey(true);
-                EncounterType();
+                Gui();
             }
-            else if (input.Contains("look"))
+            else if (input.Contains("2"))
             {
                 if (success != 1)
                 {
@@ -250,7 +250,7 @@ namespace MazeGame
                     Console.ReadKey(true);
                     Console.WriteLine("You jump the trap and take no damage.");
                     Console.ReadKey(true);
-                    EncounterType();
+                    Gui();
                 }
                 else
                 {
@@ -259,7 +259,7 @@ namespace MazeGame
                     Console.WriteLine("But you don't get enough speed get your foot impaled");
                     Console.WriteLine("And take 20 damage");
                     Console.ReadKey(true);
-                    EncounterType();
+                    Gui();
                 }
             }
             else
@@ -276,39 +276,39 @@ namespace MazeGame
             Console.Clear();
             Console.WriteLine("You find an unknown potion");
             Console.WriteLine("What do you want to do with it?");
-            Console.WriteLine("Drink   -   Leave it");
+            Console.WriteLine("1. Drink\n2. Leave it");
             
             Random chance = new Random();
             int success = chance.Next(1, 21);
 
             string input = Console.ReadLine().ToLower().Trim();
-            if (input.Contains("drink"))
+            if (input.Contains("1"))
             {
                 if (success == 20)
                 {
                     Console.WriteLine("You drink the potion restoring 30 hp.");
                     Console.ReadKey(true);
-                    EncounterType();
+                    Gui();
                 }
                 else if (success == 1)
                 {
                     Console.WriteLine("You drink the potion but it has gone stale.");
                     Console.WriteLine("You take 10 damage");
                     Console.ReadKey(true);
-                    EncounterType();
+                    Gui();
                 }
                 else
                 {
                     Console.WriteLine("You drink the potion restoring 15 hp");
                     Console.ReadKey(true);
-                    EncounterType();
+                    Gui();
                 }
             }
-            else if (input.Contains("leave"))
+            else if (input.Contains("2"))
             {
                 Console.WriteLine("You leave the potion");
                 Console.ReadKey(true);
-                EncounterType();
+                Gui();
             }
             else
             {
@@ -354,14 +354,14 @@ namespace MazeGame
                     Console.ReadKey(true);
                     Console.WriteLine("You continue walking");
                     Console.ReadKey(true);
-                    EncounterType();
+                    Gui();
                 }
                 else if (success > 1 && success < 20)
                 {
                     Console.WriteLine("You don't notice anything happening \nUntil a stretching arm with a boxing glove hits you hard in the nuts");
                     Console.WriteLine("You take 20 damage and leave your masculinity");
                     Console.ReadKey(true);
-                    EncounterType();
+                    Gui();
                 }
                 else if (success == 20)
                 {
@@ -376,7 +376,7 @@ namespace MazeGame
                     }
                     else
                     {
-                        EncounterType();
+                        Gui();
                     }
                 }
                 else
@@ -386,21 +386,24 @@ namespace MazeGame
                     Console.ReadKey(true);
                     LeverFun();
                 }            }        }
-        static void WeirdStranger()        {            string[] differentItems = { "Potion of Health", "Plague" };            Random rndNumber = new Random();            int i = rndNumber.Next(differentItems.Length);            Console.WriteLine("You have met weird looking stranger. He wants to give you a present.Do you accept it?\n[Y] or [N]");            string input = Console.ReadLine();            if (input.ToLower() == "y")            {                if (differentItems[i] == "Potion of Health")                {                    Console.WriteLine($"You got a {differentItems[i]} and increased your health by 10");                }                else                {                    Console.WriteLine($"You got a {differentItems[i]} and took 20 damage!");                }            }            else            {                Console.WriteLine("You like playing it safe and move on!");            }            //Console.WriteLine("Health: " + health);        }
+        static void WeirdStranger()        {            string[] differentItems = { "Potion of Health", "Plague" };            Random rndNumber = new Random();            int i = rndNumber.Next(differentItems.Length);            Console.WriteLine("You have met weird looking stranger. He wants to give you a present.Do you accept it?\n[Y] or [N]");            string input = Console.ReadLine();            if (input.ToLower() == "y")            {                if (differentItems[i] == "Potion of Health")                {                    Console.WriteLine($"You got a {differentItems[i]} and increased your health by 10");                    Console.ReadKey(true);                    Gui();                }                else                {                    Console.WriteLine($"You got a {differentItems[i]} and took 20 damage!");                    Console.ReadKey(true);                    Gui();                }            }            else            {                Console.WriteLine("You like playing it safe and move on!");                Console.ReadKey(true);                Gui();            }            //Console.WriteLine("Health: " + health);        }
 
         // User Interface
-        static void GuiDrawLine(int[] Maze, int line)        {            Console.BackgroundColor = ConsoleColor.Gray;            int i = 1 * line * 56 ;            while (i < 1 * line * 56 + 56)            {                //Console.BackgroundColor = Color[2];                //Console.ForegroundColor = Color[1];                //Console.Write(Maze[i + line * 56]);                switch (Maze[i])                {                    case 0:                        {                            Console.Write(" ");                            break;                        }                    case 1:                        {                            Console.ForegroundColor = ConsoleColor.DarkRed;                            Console.Write("█");                            Console.ForegroundColor = ConsoleColor.White;                            break;                        }                    case 2:                        {                            Console.ForegroundColor = ConsoleColor.Red;                            Console.Write("▓");                            Console.ForegroundColor = ConsoleColor.White;                            break;                        }
+        static void GuiDrawLine(int[] Maze, int line)        {            Console.BackgroundColor = ConsoleColor.Gray;            int i = 1 * line * 56 ;            while (i < 1 * line * 56 + 56)            {                //Console.BackgroundColor = Color[2];                //Console.ForegroundColor = Color[1];                //Console.Write(Maze[i + line * 56]);                switch (Maze[i])                {                    case 0:                        {                            //Pathway                            Console.Write(" ");                            break;                        }                    case 1:                        {                            //Border wall                            Console.ForegroundColor = ConsoleColor.DarkRed;                            Console.Write("█");                            Console.ForegroundColor = ConsoleColor.White;                            break;                        }                    case 2:                        {                            //Wall                            Console.ForegroundColor = ConsoleColor.Red;                            Console.Write("▓");                            Console.ForegroundColor = ConsoleColor.White;                            break;                        }
                     case 3:
                         {
-                            Console.ForegroundColor = ConsoleColor.Green;
+                            //Bush
+                            Console.ForegroundColor = ConsoleColor.DarkGreen;
                             Console.Write("*");                            Console.ForegroundColor = ConsoleColor.White;                            break;
                         }
                     case 4:
                         {
+                            //Goal
                             Console.BackgroundColor = ConsoleColor.Black;
                             Console.Write("░");                            Console.BackgroundColor = ConsoleColor.Gray;                            break;
                         }
                     case 5:                        {
+                            //Player
                             Console.ForegroundColor = ConsoleColor.DarkBlue;
                             Console.Write("¤");
                             Console.ForegroundColor = ConsoleColor.White;
@@ -409,7 +412,7 @@ namespace MazeGame
         static void Gui()        {            int[] Maze = {  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                             1, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 2, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 4, 1,
                             1, 0, 2, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 0, 2, 2, 0, 2, 2, 2, 2, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 1,
-                            1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 2, 2, 2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 2, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 1,
+                            1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 2, 2, 2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 2, 0, 0, 0, 0, 2, 3, 2, 3, 2, 0, 2, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 1,
                             1, 0, 2, 2, 2, 2, 0, 2, 0, 0, 2, 2, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 0, 2, 0, 2, 2, 2, 0, 0, 0, 1,
                             1, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 2, 2, 0, 0, 2, 2, 2, 2, 0, 2, 2, 2, 0, 0, 2, 2, 2, 2, 0, 2, 0, 0, 0, 2, 2, 2, 2, 1,
                             1, 0, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1,
@@ -418,9 +421,9 @@ namespace MazeGame
                             1, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 2, 2, 0, 0, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 1,
                             1, 0, 2, 0, 2, 2, 2, 0, 2, 2, 0, 2, 2, 0, 2, 0, 0, 2, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 2, 0, 2, 1,
                             1, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 2, 2, 0, 2, 2, 0, 2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0, 1,
-                            1, 0, 2, 2, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 0, 1,
-                            1, 0, 0, 0, 2, 0, 0, 0, 0, 2, 2, 2, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 2, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 0, 0, 0, 1,
-                            1, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 2, 2, 2, 2, 2, 1,
+                            1, 0, 2, 2, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 3, 3, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 0, 1,
+                            1, 0, 0, 0, 2, 0, 0, 0, 0, 2, 2, 2, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 2, 0, 2, 2, 0, 2, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 0, 0, 0, 1,
+                            1, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 3, 3, 3, 3, 3, 0, 2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 2, 2, 2, 2, 2, 1,
                             1, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1,
                             1, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 2, 2, 2, 0, 2, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 2, 2, 2, 1,
                             1, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 0, 0, 2, 0, 0, 0, 1,
@@ -429,7 +432,7 @@ namespace MazeGame
                             1, 0, 2, 0, 2, 2, 2, 2, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 0, 1,
                             1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 1,
                             1, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 0, 2, 0, 1,
-                            1, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 0, 0, 2, 0, 2, 2, 2, 0, 1,
+                            1, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 2, 2, 2, 0, 2, 0, 2, 3, 2, 3, 2, 0, 2, 0, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 0, 0, 2, 0, 2, 2, 2, 0, 1,
                             1, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 1,
                             1, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 0, 2, 2, 2, 2, 0, 0, 2, 0, 0, 2, 0, 2, 2, 2, 2, 1,
                             1, 0, 2, 0, 0, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 2, 0, 0, 0, 2, 0, 2, 2, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 0, 0, 0, 1,
@@ -521,7 +524,7 @@ namespace MazeGame
             Gui();
         }
 
-
+        //Items and inventory
         static bool AddItem(int itemId)
         {
             int maxSlots = 5;
