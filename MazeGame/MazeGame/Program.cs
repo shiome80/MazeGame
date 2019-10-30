@@ -13,8 +13,8 @@ namespace MazeGame
 
         static void Main(string[] args)
         {
-            GameMenu();
-        }
+            Gui();
+        }
 
 
         // Testing area for our codes
@@ -68,7 +68,12 @@ namespace MazeGame
                         DeathTrap();
                         break;
                     }
-                case int n when (n <= 8 && n >= 2):
+                case int n when (n <= 2 && n >= 4):
+                    {
+                        LeverFun();
+                        break;
+                    }
+                case int n when (n <= 8 && n >= 5):
                     {
                         Gui();
                         break;
@@ -121,7 +126,7 @@ namespace MazeGame
                 {
                     Console.WriteLine("You fail jumping the pit and fall to your death.");
                     Console.ReadKey(true);
-                    GameMenu();
+                    Reset();
                 }
             }
             else if (userInput.ToLower().Trim().Contains("2"))
@@ -174,6 +179,7 @@ namespace MazeGame
                     Console.WriteLine("The goblin start beating you");
                     Console.WriteLine("You take 10 damage");
                     Console.ReadKey(true);
+                    stats[0] -= 10;
                     Gui();
                 }
                 else
@@ -198,6 +204,7 @@ namespace MazeGame
                 Console.ReadKey(true);
                 Console.WriteLine("The goblin gets scared and throws his dagger at you and runs away");
                 Console.WriteLine("You take 5 damage");
+                stats[0] -= 5;
                 Console.ReadKey(true);
                 Gui();
             }
@@ -223,6 +230,7 @@ namespace MazeGame
             {
                 Console.WriteLine("You don't even notice it");
                 Console.WriteLine("You get a concussion and take 10 damage");
+                stats[0] -= 10;
                 Console.ReadKey(true);
                 Gui();
             }
@@ -230,6 +238,7 @@ namespace MazeGame
             {
                 Console.WriteLine("You only just notice the wire and manage to break the fall");
                 Console.WriteLine("You take 5 damage");
+                stats[0] -= 5;
                 Console.ReadKey(true);
                 Gui();
             }
@@ -259,6 +268,7 @@ namespace MazeGame
                 Console.WriteLine("You continue walking only to trigger a spike trap in the floor");
                 Console.WriteLine("Taking 50 damage");
                 Console.ReadKey(true);
+                stats[0] -= 50;
                 Gui();
             }
             else if (input.Contains("2"))
@@ -278,6 +288,7 @@ namespace MazeGame
                     Console.WriteLine("But you don't get enough speed get your foot impaled");
                     Console.WriteLine("And take 20 damage");
                     Console.ReadKey(true);
+                    stats[0] -= 20;
                     Gui();
                 }
             }
@@ -305,22 +316,43 @@ namespace MazeGame
             {
                 if (success == 20)
                 {
-                    Console.WriteLine("You drink the potion restoring 30 hp.");
+                    Console.WriteLine("You drink the potion ");
                     Console.ReadKey(true);
+                    if (stats[0] >= 100)
+                    {
+                        Console.WriteLine("Your HP can't go higher than 100");
+                        Console.ReadKey(true);
+                    }
+                    else
+                    {
+                        Console.Write("restoring 30 hp.");
+                        stats[0] += 30;
+                    }
                     Gui();
                 }
                 else if (success == 1)
                 {
-                    Console.WriteLine("You drink the potion but it has gone stale.");
+                    Console.WriteLine("You drink the potion but it turns out to be poison.");
                     Console.WriteLine("You take 10 damage");
                     Console.ReadKey(true);
+                    stats[0] -= 10;
                     Gui();
                 }
                 else
                 {
-                    Console.WriteLine("You drink the potion restoring 15 hp");
-                    Console.ReadKey(true);
-                    Gui();
+                    if (stats[0] >= 100)
+                    {
+                        Console.WriteLine("Your Hp can't go higher than 100");
+                        Console.ReadKey(true);
+                        Gui();
+                    }
+                    else
+                    {
+                        Console.WriteLine("You drink the potion restoring 15 hp");
+                        Console.ReadKey(true);
+                        stats[0] += 15;
+                        Gui();
+                    }
                 }
             }
             else if (input.Contains("2"))
@@ -357,14 +389,18 @@ namespace MazeGame
             {
                 Console.WriteLine("You walk across the odd looking tiles");
                 Console.ReadKey(true);
-                if (success == 1)
+                if (success <= 10)
                 {
                     Console.WriteLine("This triggers a hidden trap \nAn arrow flies out of the wall and hits your arm \nYou take 10 damage");
+                    Console.ReadKey(true);
+                    stats[0] -= 10;
+                    Gui();
                 }
                 else if (success <= 20)
                 {
                     Console.WriteLine("Good thing nothing happened");
-                    Console.ReadKey();
+                    Console.ReadKey(true);
+                    Gui();
                 }
             }
             else if (input.Contains("2"))
@@ -379,14 +415,15 @@ namespace MazeGame
                     Console.ReadKey(true);
                     Gui();
                 }
-                else if (success > 1 && success < 20)
+                else if (success > 1 && success < 15)
                 {
                     Console.WriteLine("You don't notice anything happening \nUntil a stretching arm with a boxing glove hits you hard in the nuts");
                     Console.WriteLine("You take 20 damage and leave your masculinity");
                     Console.ReadKey(true);
+                    stats[0] -= 20;
                     Gui();
                 }
-                else if (success == 20)
+                else if (success > 15)
                 {
                     Console.WriteLine("The lever opens a hidden door");
                     Console.ReadKey(true);
@@ -408,9 +445,13 @@ namespace MazeGame
                     Console.WriteLine("Press any key to try again");
                     Console.ReadKey(true);
                     LeverFun();
-                }
-            }
-        }
+                }            }        }
+        static void WeirdStranger()        {            string[] differentItems = { "Potion of Health", "Plague" };            Random rndNumber = new Random();            int i = rndNumber.Next(differentItems.Length);            Console.WriteLine("You have met weird looking stranger. He wants to give you a present.Do you accept it?\n[Y] or [N]");            string input = Console.ReadLine();            if (input.ToLower() == "y")            {                if (differentItems[i] == "Potion of Health")                {                    Console.WriteLine($"You got a {differentItems[i]} and increased your health by 10");                    Console.ReadKey(true);                    if (stats[0] >= 100)
+                    {
+                        Console.WriteLine("Your HP can't go higher than 100");
+                        Console.ReadKey(true);
+                        Gui();
+                    }                    Gui();                }                else                {                    Console.WriteLine($"You got a {differentItems[i]} and took 20 damage!");                    Console.ReadKey(true);                    stats[0] -= 20;                    Gui();                }            }            else            {                Console.WriteLine("You like playing it safe and move on!");                Console.ReadKey(true);                Gui();            }            //Console.WriteLine("Health: " + health);        }
 
         static void WeirdStranger()
         {
@@ -444,39 +485,7 @@ namespace MazeGame
         }
 
         // User Interface
-        static void GuiDrawLine(int[] Maze, int line)
-        {
-            Console.BackgroundColor = ConsoleColor.Gray;
-            int i = 1 * line * 56;
-            while (i < 1 * line * 56 + 56)
-            {
-                //Console.BackgroundColor = Color[2];
-                //Console.ForegroundColor = Color[1];
-                //Console.Write(Maze[i + line * 56]);
-                switch (Maze[i])
-                {
-                    case 0:
-                        {
-                            //Pathway
-                            Console.Write(" ");
-                            break;
-                        }
-                    case 1:
-                        {
-                            //Border wall
-                            Console.ForegroundColor = ConsoleColor.DarkRed;
-                            Console.Write("█");
-                            Console.ForegroundColor = ConsoleColor.White;
-                            break;
-                        }
-                    case 2:
-                        {
-                            //Wall
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.Write("▓");
-                            Console.ForegroundColor = ConsoleColor.White;
-                            break;
-                        }
+        static void GuiDrawLine(int[] Maze, int line)        {            Console.BackgroundColor = ConsoleColor.Gray;            int i = 1 * line * 56 ;            while (i < 1 * line * 56 + 56)            {                //Console.BackgroundColor = Color[2];                //Console.ForegroundColor = Color[1];                //Console.Write(Maze[i + line * 56]);                switch (Maze[i])                {                    case 0:                        {                            //Pathway                            Console.Write(" ");                            break;                        }                    case 1:                        {                            //Border wall                            Console.ForegroundColor = ConsoleColor.DarkBlue;                            Console.Write("█");                            Console.ForegroundColor = ConsoleColor.White;                            break;                        }                    case 2:                        {                            //Wall                            Console.ForegroundColor = ConsoleColor.Red;                            Console.Write("▓");                            Console.ForegroundColor = ConsoleColor.White;                            break;                        }
                     case 3:
                         {
                             //Bush
@@ -509,33 +518,25 @@ namespace MazeGame
                             Console.BackgroundColor = ConsoleColor.Gray;
                             break;
                         }
-                    default:
-                        {
-                            Console.Write(" ");
-                            break;
-                        }
-                }
-                i += 1;
-            }
-            Console.BackgroundColor = ConsoleColor.Black;
-        }
-        static void Gui()
-        {
-            int[] Maze = {  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                            1, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 2, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 4, 1,
-                            1, 0, 2, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 0, 2, 2, 0, 2, 2, 2, 2, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 1,
-                            1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 2, 2, 2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 2, 0, 0, 0, 0, 2, 3, 2, 3, 2, 0, 2, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 1,
-                            1, 0, 2, 2, 2, 2, 0, 2, 0, 0, 2, 2, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 0, 2, 0, 2, 2, 2, 0, 0, 0, 1,
-                            1, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 2, 2, 0, 0, 2, 2, 2, 2, 0, 2, 2, 2, 0, 0, 2, 2, 2, 2, 0, 2, 0, 0, 0, 2, 2, 2, 2, 1,
-                            1, 0, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1,
-                            1, 2, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 2, 2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 1,
-                            1, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 1,
-                            1, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 2, 2, 0, 0, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 1,
-                            1, 0, 2, 0, 2, 2, 2, 0, 2, 2, 0, 2, 2, 0, 2, 0, 0, 2, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 2, 0, 2, 1,
-                            1, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 2, 2, 0, 2, 2, 0, 2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0, 1,
-                            1, 0, 2, 2, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 3, 3, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 0, 1,
-                            1, 0, 0, 0, 2, 0, 0, 0, 0, 2, 2, 2, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 2, 0, 2, 2, 0, 2, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 0, 0, 0, 1,
-                            1, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 3, 3, 3, 3, 3, 0, 2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 2, 2, 2, 2, 2, 1,
+                    case 7:                        {
+                            Console.BackgroundColor = ConsoleColor.Black;
+                            Console.Write("░");                            Console.BackgroundColor = ConsoleColor.Gray;                            break;
+                        }                    default:                        {                            Console.Write(" ");                            break;                        }                }                i += 1;            }            Console.BackgroundColor = ConsoleColor.Black;        }
+        static void Gui()        {            int[] Maze = {  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                            1, 7, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 2, 3, 3, 3, 3, 3, 0, 0, 2, 0, 0, 0, 0, 2, 2, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 4, 1,
+                            1, 3, 2, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 0, 2, 0, 0, 2, 3, 3, 3, 3, 3, 0, 0, 2, 0, 2, 2, 0, 0, 2, 2, 0, 2, 2, 2, 2, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 2, 3, 1,
+                            1, 3, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 2, 2, 2, 0, 3, 3, 3, 0, 2, 0, 2, 0, 0, 2, 2, 0, 0, 0, 0, 2, 3, 2, 3, 2, 0, 2, 2, 0, 0, 0, 2, 6, 6, 6, 2, 0, 2, 3, 1,
+                            1, 3, 2, 2, 2, 2, 0, 2, 0, 0, 2, 2, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 0, 2, 0, 2, 2, 2, 0, 3, 3, 1,
+                            1, 3, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 2, 2, 0, 0, 2, 2, 2, 2, 0, 2, 2, 2, 0, 0, 2, 2, 2, 2, 0, 2, 0, 0, 0, 2, 2, 2, 2, 1,
+                            1, 6, 6, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1,
+                            1, 2, 2, 0, 2, 0, 0, 0, 2, 6, 7, 6, 2, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 2, 2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 6, 6, 0, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 1,
+                            1, 0, 2, 0, 0, 0, 0, 0, 2, 6, 0, 6, 2, 0, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 1,
+                            1, 0, 2, 0, 2, 0, 0, 0, 2, 6, 6, 6, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 2, 2, 0, 0, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 1,
+                            1, 0, 2, 0, 2, 2, 2, 0, 2, 2, 6, 2, 2, 0, 2, 0, 0, 2, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 2, 0, 2, 1,
+                            1, 0, 0, 0, 0, 0, 2, 0, 0, 2, 6, 2, 0, 0, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 2, 2, 0, 2, 2, 0, 2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0, 1,
+                            1, 0, 2, 2, 2, 0, 2, 2, 0, 0, 6, 6, 0, 0, 2, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 3, 3, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 2, 2, 2, 6, 6, 6, 0, 0, 0, 0, 2, 2, 0, 2, 2, 0, 1,
+                            1, 0, 0, 0, 2, 0, 0, 0, 0, 2, 2, 2, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 2, 0, 2, 2, 0, 2, 2, 0, 2, 3, 3, 6, 2, 0, 2, 0, 0, 2, 0, 0, 0, 0, 1,
+                            1, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 3, 3, 3, 3, 3, 0, 2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 7, 3, 6, 2, 0, 2, 0, 0, 2, 2, 2, 2, 2, 1,
                             1, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1,
                             1, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 2, 2, 2, 0, 2, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 2, 2, 2, 1,
                             1, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 0, 0, 2, 0, 0, 0, 1,
@@ -547,15 +548,16 @@ namespace MazeGame
                             1, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 2, 2, 2, 0, 2, 0, 2, 3, 2, 3, 2, 0, 2, 0, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 0, 0, 2, 0, 2, 2, 2, 0, 1,
                             1, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 1,
                             1, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 0, 2, 2, 2, 2, 0, 0, 2, 0, 0, 2, 0, 2, 2, 2, 2, 1,
-                            1, 0, 2, 0, 0, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 2, 0, 0, 0, 2, 0, 2, 2, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 0, 0, 0, 1,
-                            1, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 2, 2, 0, 0, 0, 2, 0, 1,
-                            1, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 2, 2, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 1,
+                            1, 0, 2, 0, 0, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 2, 0, 0, 0, 2, 0, 2, 2, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 6, 6, 6, 1,
+                            1, 0, 2, 6, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 2, 2, 0, 6, 6, 2, 0, 1,
+                            1, 0, 2, 3, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 2, 2, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 6, 2, 7, 1,
                             1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                            };
             //1 = ydre mur
             //2 = inder mur
             //3 = busk
             //4 = mål
+            //6 = lava
             //0 = pathway
             if (stats[0] < 1) { Dead(); }
             Console.WriteLine(Maze.Length);
@@ -735,7 +737,7 @@ namespace MazeGame
         static void Reset()
         {
             playerP[0] = 2;
-            playerP[1] = 2;
+            playerP[1] = 3;
             steps = 0;
             stats[0] = 100;
             Gui();
