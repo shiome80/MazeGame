@@ -4,16 +4,19 @@ namespace MazeGame
 {
     class Program
     {
-        public static int[] playerP = { 2, 2 };        
-        public static int maxSlots = 5;
-        public static int[] items = new int[maxSlots];
 
+        public static int[] stats = { 100, 20 }; 
+        public static int[] items = new int[maxSlots];
+        public static int[] playerP = { 2, 3 };
+        public static int steps = 0;
+        public static int[] stats = { 100, 20 };
+
         static void Main(string[] args)
-        {
+        {
             GameMenu();
         }
-
-        // Testing area for our codes
+
+        // Testing area for our codes
         private static void GameMenu()
         {
             Console.WriteLine("Test af forskellige tasks");
@@ -64,17 +67,22 @@ namespace MazeGame
                         DeathTrap();
                         break;
                     }
-                case int n when (n <= 10 && n >= 2):
+                case int n when (n <= 8 && n >= 2):
+                    {
+                        Gui();
+                        break;
+                    }
+                case int n when (n <= 12 && n >= 9):
                     {
                         Goblin();
                         break;
                     }
-                case int n when (n <= 15 && n >= 10):
+                case int n when (n <= 17 && n >= 13):
                     {
                         TripWire();
                         break;
                     }
-                case int n when (n <= 19 && n >= 15):
+                case int n when (n == 19 || n == 18):
                     {
                         SpikeTrap();
                         break;
@@ -96,23 +104,34 @@ namespace MazeGame
 
             Console.WriteLine("You stand before a seemingly buttomless pit.");
             Console.WriteLine("What do you do?");
+            Console.WriteLine("1. Try jump over \n2. Kill yourself");
             string userInput = Console.ReadLine();
 
-            if (userInput.ToLower().Contains("jump"))
+            if (userInput.ToLower().Contains("1"))
             {
                 you = chance.Next(1, 100);
                 if (you >= 25)
                 {
                     Console.WriteLine("You succed jumping over the pit");
                     Console.ReadKey(true);
-                    EncounterType();
+                    Gui();
                 }
                 else
                 {
                     Console.WriteLine("You fail jumping the pit and fall to your death.");
                     Console.ReadKey(true);
-                    // Jump to Menu
+                    GameMenu();
                 }
+            }
+            else if (userInput.ToLower().Trim().Contains("2"))
+            {
+                Console.WriteLine("I mean.... sure.. go ahead");
+                Console.ReadKey(true);
+                Console.WriteLine("Guess you die...");
+                Console.ReadKey(true);
+                Console.WriteLine("Press enter to start over");
+                Console.ReadKey(true);
+                Reset();
             }
             else
             {
@@ -133,11 +152,10 @@ namespace MazeGame
             Console.WriteLine("You stand before a single goblin");
             Console.WriteLine("What do you want to do?");
             Console.WriteLine("");
-            Console.WriteLine("Attack");
-            Console.WriteLine("Befriend   -    Run away");
-
+            Console.WriteLine("1. Attack \n2. Befriend \n3. Run away");
+                
             input = Console.ReadLine().ToLower().Trim();
-            if (input.Contains("attack"))
+            if (input.Contains("1"))
             {
                 Console.WriteLine("You attack the goblin");
                 Console.WriteLine("");
@@ -147,7 +165,7 @@ namespace MazeGame
                 {
                     Console.WriteLine("and punch so hard crack his skull open, killing it instantly");
                     Console.ReadKey(true);
-                    EncounterType();
+                    Gui();
                 }
                 else if (chance == 1)
                 {
@@ -155,23 +173,23 @@ namespace MazeGame
                     Console.WriteLine("The goblin start beating you");
                     Console.WriteLine("You take 10 damage");
                     Console.ReadKey(true);
-                    EncounterType();
+                    Gui();
                 }
                 else
                 {
                     Console.WriteLine("You attack the goblin with your fist");
-                    Console.WriteLine("The goblin flees into the darkness");
+                    Console.WriteLine("The goblin gets scared and flees into the darkness");
                     Console.ReadKey(true);
-                    EncounterType();
+                    Gui();
                 }
             }
-            else if (input.Contains("run"))
+            else if (input.Contains("3"))
             {
                 Console.WriteLine("You can't run dumbass.. You're trapped in a maze..");
                 Console.ReadKey(true);
                 Goblin();
             }
-            else if (input.Contains("befriend"))
+            else if (input.Contains("2"))
             {
                 Console.WriteLine("You try to make the goblin your friend.");
                 Console.ReadKey(true);
@@ -180,16 +198,12 @@ namespace MazeGame
                 Console.WriteLine("The goblin gets scared and throws his dagger at you and runs away");
                 Console.WriteLine("You take 5 damage");
                 Console.ReadKey(true);
-                EncounterType();
-                // continue to next field
+                Gui();
             }
-            else
-            {
-                Console.WriteLine("Wrong input");
+            else
+            {                Console.WriteLine("Wrong input");
                 Console.WriteLine("Press any key to try again");
-                Console.ReadKey(true);
-                Goblin();
-            }
+                Console.ReadKey(true);                Goblin();            }
         }
 
         private static void TripWire()
@@ -206,21 +220,21 @@ namespace MazeGame
                 Console.WriteLine("You don't even notice it");
                 Console.WriteLine("You get a concussion and take 10 damage");
                 Console.ReadKey(true);
-                EncounterType();
+                Gui();
             }
             else if (success == 2)
             {
                 Console.WriteLine("You only just notice the wire and manage to break the fall");
                 Console.WriteLine("You take 5 damage");
                 Console.ReadKey(true);
-                EncounterType();
+                Gui();
             }
             else
             {
                 Console.WriteLine("You notice it easily and skip over it");
                 Console.WriteLine("Continue without taking any damage.");
                 Console.ReadKey(true);
-                EncounterType();
+                Gui();
             }
         }
 
@@ -229,29 +243,29 @@ namespace MazeGame
             Console.Clear();
             Console.WriteLine("You stand at a hallway");
             Console.WriteLine("What would you like to do?");
-            Console.WriteLine("Walk    -     Look Around");
+            Console.WriteLine("1. Walk \n2. Look Around");
 
             Random chance = new Random();
             int success = chance.Next(1, 21);
 
             string input = Console.ReadLine().ToLower().Trim();
 
-            if (input.Contains("walk"))
+            if (input.Contains("1"))
             {
                 Console.WriteLine("You continue walking only to trigger a spike trap in the floor");
                 Console.WriteLine("Taking 50 damage");
                 Console.ReadKey(true);
-                EncounterType();
+                Gui();
             }
-            else if (input.Contains("look"))
+            else if (input.Contains("2"))
             {
+                Console.WriteLine("You look around and notice some holes in the ground");
                 if (success != 1)
                 {
-                    Console.WriteLine("You look around and notice some holes in the ground");
                     Console.ReadKey(true);
                     Console.WriteLine("You jump the trap and take no damage.");
                     Console.ReadKey(true);
-                    EncounterType();
+                    Gui();
                 }
                 else
                 {
@@ -260,7 +274,7 @@ namespace MazeGame
                     Console.WriteLine("But you don't get enough speed get your foot impaled");
                     Console.WriteLine("And take 20 damage");
                     Console.ReadKey(true);
-                    EncounterType();
+                    Gui();
                 }
             }
             else
@@ -277,39 +291,39 @@ namespace MazeGame
             Console.Clear();
             Console.WriteLine("You find an unknown potion");
             Console.WriteLine("What do you want to do with it?");
-            Console.WriteLine("Drink   -   Leave it");
-
+            Console.WriteLine("1. Drink\n2. Leave it");
+            
             Random chance = new Random();
             int success = chance.Next(1, 21);
 
             string input = Console.ReadLine().ToLower().Trim();
-            if (input.Contains("drink"))
+            if (input.Contains("1"))
             {
                 if (success == 20)
                 {
                     Console.WriteLine("You drink the potion restoring 30 hp.");
                     Console.ReadKey(true);
-                    EncounterType();
+                    Gui();
                 }
                 else if (success == 1)
                 {
                     Console.WriteLine("You drink the potion but it has gone stale.");
                     Console.WriteLine("You take 10 damage");
                     Console.ReadKey(true);
-                    EncounterType();
+                    Gui();
                 }
                 else
                 {
                     Console.WriteLine("You drink the potion restoring 15 hp");
                     Console.ReadKey(true);
-                    EncounterType();
+                    Gui();
                 }
             }
-            else if (input.Contains("leave"))
+            else if (input.Contains("2"))
             {
                 Console.WriteLine("You leave the potion");
                 Console.ReadKey(true);
-                EncounterType();
+                Gui();
             }
             else
             {
@@ -355,14 +369,14 @@ namespace MazeGame
                     Console.ReadKey(true);
                     Console.WriteLine("You continue walking");
                     Console.ReadKey(true);
-                    EncounterType();
+                    Gui();
                 }
                 else if (success > 1 && success < 20)
                 {
                     Console.WriteLine("You don't notice anything happening \nUntil a stretching arm with a boxing glove hits you hard in the nuts");
                     Console.WriteLine("You take 20 damage and leave your masculinity");
                     Console.ReadKey(true);
-                    EncounterType();
+                    Gui();
                 }
                 else if (success == 20)
                 {
@@ -377,7 +391,7 @@ namespace MazeGame
                     }
                     else
                     {
-                        EncounterType();
+                        Gui();
                     }
                 }
                 else
@@ -387,59 +401,89 @@ namespace MazeGame
                     Console.ReadKey(true);
                     LeverFun();
                 }            }        }
-        static void WeirdStranger()        {            string[] differentItems = { "Potion of Health", "Plague" };            Random rndNumber = new Random();            int i = rndNumber.Next(differentItems.Length);            Console.WriteLine("You have met weird looking stranger. He wants to give you a present.Do you accept it?\n[Y] or [N]");            string input = Console.ReadLine();            if (input.ToLower() == "y")            {                if (differentItems[i] == "Potion of Health")                {                    Console.WriteLine($"You got a {differentItems[i]} and increased your health by 10");                }                else                {                    Console.WriteLine($"You got a {differentItems[i]} and took 20 damage!");                }            }            else            {                Console.WriteLine("You like playing it safe and move on!");            }
-            //Console.WriteLine("Health: " + health);
-        }
+        static void WeirdStranger()        {            string[] differentItems = { "Potion of Health", "Plague" };            Random rndNumber = new Random();            int i = rndNumber.Next(differentItems.Length);            Console.WriteLine("You have met weird looking stranger. He wants to give you a present.Do you accept it?\n[Y] or [N]");            string input = Console.ReadLine();            if (input.ToLower() == "y")            {                if (differentItems[i] == "Potion of Health")                {                    Console.WriteLine($"You got a {differentItems[i]} and increased your health by 10");                    Console.ReadKey(true);                    Gui();                }                else                {                    Console.WriteLine($"You got a {differentItems[i]} and took 20 damage!");                    Console.ReadKey(true);                    Gui();                }            }            else            {                Console.WriteLine("You like playing it safe and move on!");                Console.ReadKey(true);                Gui();            }            //Console.WriteLine("Health: " + health);        }
 
         // User Interface
-
-
-        static void GuiDrawLine(int[] Maze, int line)        {            int i = 1 * line * 56;            while (i < 1 * line * 56 + 56)            {
-                //Console.BackgroundColor = Color[2];
-                //Console.ForegroundColor = Color[1];
-                //Console.Write(Maze[i + line * 56]);
-                switch (Maze[i])                {                    case 0:                        {                            Console.Write(" ");                            break;                        }                    case 1:                        {                            Console.Write("█");                            break;                        }                    case 2:                        {                            Console.Write("▓");                            break;                        }
+        static void GuiDrawLine(int[] Maze, int line)        {            Console.BackgroundColor = ConsoleColor.Gray;            int i = 1 * line * 56 ;            while (i < 1 * line * 56 + 56)            {                //Console.BackgroundColor = Color[2];                //Console.ForegroundColor = Color[1];                //Console.Write(Maze[i + line * 56]);                switch (Maze[i])                {                    case 0:                        {                            //Pathway                            Console.Write(" ");                            break;                        }                    case 1:                        {                            //Border wall                            Console.ForegroundColor = ConsoleColor.DarkRed;                            Console.Write("█");                            Console.ForegroundColor = ConsoleColor.White;                            break;                        }                    case 2:                        {                            //Wall                            Console.ForegroundColor = ConsoleColor.Red;                            Console.Write("▓");                            Console.ForegroundColor = ConsoleColor.White;                            break;                        }
+                    case 3:
+                        {
+                            //Bush
+                            Console.ForegroundColor = ConsoleColor.DarkGreen;
+                            Console.Write("*");                            Console.ForegroundColor = ConsoleColor.White;                            break;
+                        }
+                    case 4:
+                        {
+                            //Goal
+                            Console.BackgroundColor = ConsoleColor.Black;
+                            Console.Write("░");                            Console.BackgroundColor = ConsoleColor.Gray;                            break;
+                        }
                     case 5:                        {
+                            //Player
+                            Console.ForegroundColor = ConsoleColor.DarkBlue;
                             Console.Write("¤");
                             break;
                         }                    default:                        {                            Console.Write(" ");                            break;                        }                }                i += 1;            }        }
         static void Gui()        {            int[] Maze = {  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                            1, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 2, 2, 0, 0, 0, 2, 2, 0, 0, 2, 2, 0, 1,
-                            1, 0, 2, 2, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 2, 0, 0, 2, 0, 2, 0, 0, 2, 2, 0, 0, 2, 1,
-                            1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 2, 0, 0, 2, 0, 2, 0, 0, 2, 2, 0, 0, 2, 1,
-                            1, 0, 2, 2, 2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 2, 2, 0, 0, 0, 2, 2, 0, 0, 2, 2, 0, 1,
-                            1, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 1,
-                            1, 0, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 1,
-                            1, 2, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 0, 2, 0, 0, 2, 0, 0, 1,
-                            1, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 0, 1,
-                            1, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 2, 2, 0, 0, 0, 1,
-                            1, 0, 2, 0, 2, 2, 2, 0, 2, 2, 0, 2, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1,
-                            1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 2, 2, 0, 0, 2, 2, 2, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 0, 2, 2, 1,
-                            1, 0, 2, 2, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 2, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 2, 2, 1,
-                            1, 0, 0, 0, 2, 0, 0, 0, 0, 2, 2, 2, 2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1,
-                            1, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 2, 2, 0, 0, 0, 2, 0, 2, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 1,
-                            1, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 2, 0, 2, 0, 0, 0, 2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 1,
-                            1, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 2, 2, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 2, 2, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 2, 2, 2, 2, 0, 1,
-                            1, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 1,
-                            1, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 1,
-                            1, 0, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 1,
-                            1, 0, 2, 0, 2, 2, 2, 2, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 2, 2, 2, 0, 2, 0, 0, 2, 0, 0, 1,
-                            1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 1,
-                            1, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 1,
-                            1, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 1,
-                            1, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 2, 2, 0, 0, 0, 2, 2, 0, 0, 2, 2, 0, 1,
-                            1, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 2, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 2, 0, 0, 2, 0, 2, 0, 0, 2, 2, 0, 0, 2, 1,
-                            1, 0, 2, 0, 0, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 2, 0, 0, 2, 0, 2, 0, 0, 2, 2, 0, 0, 2, 1,
-                            1, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 2, 2, 0, 0, 0, 2, 2, 0, 0, 2, 2, 0, 1,
-                            1, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 2, 2, 0, 0, 0, 2, 2, 0, 0, 2, 2, 0, 1,
+                            1, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 2, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 4, 1,
+                            1, 0, 2, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 0, 2, 2, 0, 2, 2, 2, 2, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 1,
+                            1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 2, 2, 2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 2, 0, 0, 0, 0, 2, 3, 2, 3, 2, 0, 2, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 1,
+                            1, 0, 2, 2, 2, 2, 0, 2, 0, 0, 2, 2, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 0, 2, 0, 2, 2, 2, 0, 0, 0, 1,
+                            1, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 2, 2, 0, 0, 2, 2, 2, 2, 0, 2, 2, 2, 0, 0, 2, 2, 2, 2, 0, 2, 0, 0, 0, 2, 2, 2, 2, 1,
+                            1, 0, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1,
+                            1, 2, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 2, 2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 1,
+                            1, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 1,
+                            1, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 2, 2, 0, 0, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 1,
+                            1, 0, 2, 0, 2, 2, 2, 0, 2, 2, 0, 2, 2, 0, 2, 0, 0, 2, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 2, 0, 2, 1,
+                            1, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 2, 2, 0, 2, 2, 0, 2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0, 1,
+                            1, 0, 2, 2, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 3, 3, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 0, 1,
+                            1, 0, 0, 0, 2, 0, 0, 0, 0, 2, 2, 2, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 2, 0, 2, 2, 0, 2, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 0, 0, 0, 1,
+                            1, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 3, 3, 3, 3, 3, 0, 2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 2, 2, 2, 2, 2, 1,
+                            1, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1,
+                            1, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 2, 2, 2, 0, 2, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 2, 2, 2, 1,
+                            1, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 0, 0, 2, 0, 0, 0, 1,
+                            1, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 2, 2, 2, 2, 2, 0, 2, 2, 2, 0, 2, 0, 1,
+                            1, 0, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 1,
+                            1, 0, 2, 0, 2, 2, 2, 2, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 0, 1,
+                            1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 1,
+                            1, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 0, 2, 0, 1,
+                            1, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 2, 2, 2, 0, 2, 0, 2, 3, 2, 3, 2, 0, 2, 0, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 0, 0, 2, 0, 2, 2, 2, 0, 1,
+                            1, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 1,
+                            1, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 0, 2, 2, 2, 2, 0, 0, 2, 0, 0, 2, 0, 2, 2, 2, 2, 1,
+                            1, 0, 2, 0, 0, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 2, 0, 0, 0, 2, 0, 2, 2, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 0, 0, 0, 1,
+                            1, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 2, 2, 0, 0, 0, 2, 0, 1,
+                            1, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 2, 2, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 1,
                             1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                            };
             //1 = ydre mur
             //2 = inder mur
+            //3 = busk
+            //4 = mål
             //0 = pathway
             Console.WriteLine(Maze.Length);
-            Maze[(playerP[0] - 1) + ((31 - playerP[1]) * 56)] = 5;
-            Console.Clear();            GuiDrawLine(Maze, 0); Console.WriteLine();            GuiDrawLine(Maze, 1); Console.WriteLine();            GuiDrawLine(Maze, 2); Console.WriteLine();            GuiDrawLine(Maze, 3); Console.WriteLine();            GuiDrawLine(Maze, 4); Console.WriteLine();            GuiDrawLine(Maze, 5); Console.WriteLine();            GuiDrawLine(Maze, 6); Console.WriteLine();            GuiDrawLine(Maze, 7); Console.WriteLine();            GuiDrawLine(Maze, 8); Console.WriteLine();            GuiDrawLine(Maze, 9); Console.WriteLine();            GuiDrawLine(Maze, 10); Console.WriteLine();            GuiDrawLine(Maze, 11); Console.WriteLine();            GuiDrawLine(Maze, 12); Console.WriteLine();            GuiDrawLine(Maze, 13); Console.WriteLine();            GuiDrawLine(Maze, 14); Console.WriteLine();            GuiDrawLine(Maze, 15); Console.WriteLine();            GuiDrawLine(Maze, 16); Console.WriteLine();            GuiDrawLine(Maze, 17); Console.WriteLine();            GuiDrawLine(Maze, 18); Console.WriteLine();            GuiDrawLine(Maze, 19); Console.WriteLine();            GuiDrawLine(Maze, 20); Console.WriteLine();            GuiDrawLine(Maze, 21); Console.WriteLine();            GuiDrawLine(Maze, 22); Console.WriteLine();            GuiDrawLine(Maze, 23); Console.WriteLine();            GuiDrawLine(Maze, 24); Console.WriteLine();            GuiDrawLine(Maze, 25); Console.WriteLine();            GuiDrawLine(Maze, 26); Console.WriteLine();            GuiDrawLine(Maze, 27); Console.WriteLine();            GuiDrawLine(Maze, 28); Console.WriteLine();            GuiDrawLine(Maze, 29); Console.Write("");            ConsoleKeyInfo key = Console.ReadKey();
+            Maze[(playerP[0] - 1 ) + ((31 - playerP[1]) * 56)] = 5;
+            Console.Clear();            GuiDrawLine(Maze, 0); Console.WriteLine("\t\t\t\tHEALTH");            GuiDrawLine(Maze, 1);
+            Console.Write("\t[");            int i = 0;            while (i < 51)
+            {
+                if(i > stats[0]/2)
+                {
+                    Console.BackgroundColor = ConsoleColor.Black;
+                }
+                else if (stats[0] / 2 < 20)
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                }
+                else if (stats[0] / 2 < 40)
+                {
+                    Console.BackgroundColor = ConsoleColor.Yellow;
+                }
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.Green;
+                }
+                Console.Write(" ");
+                i += 1;
+
+            }            Console.BackgroundColor = ConsoleColor.Black;            Console.Write("]");            Console.WriteLine();            GuiDrawLine(Maze, 2); Console.WriteLine();            GuiDrawLine(Maze, 3); Console.WriteLine("\tLuck\t{0}",stats[1]);            GuiDrawLine(Maze, 4); Console.WriteLine();            GuiDrawLine(Maze, 5); Console.WriteLine();            GuiDrawLine(Maze, 6); Console.WriteLine();            GuiDrawLine(Maze, 7); Console.WriteLine();            GuiDrawLine(Maze, 8); Console.WriteLine();            GuiDrawLine(Maze, 9); Console.WriteLine();            GuiDrawLine(Maze, 10); Console.WriteLine();            GuiDrawLine(Maze, 11); Console.WriteLine();            GuiDrawLine(Maze, 12); Console.WriteLine();            GuiDrawLine(Maze, 13); Console.WriteLine();            GuiDrawLine(Maze, 14); Console.WriteLine();            GuiDrawLine(Maze, 15); Console.WriteLine();            GuiDrawLine(Maze, 16); Console.WriteLine();            GuiDrawLine(Maze, 17); Console.WriteLine();            GuiDrawLine(Maze, 18); Console.WriteLine();            GuiDrawLine(Maze, 19); Console.WriteLine();            GuiDrawLine(Maze, 20); Console.WriteLine();            GuiDrawLine(Maze, 21); Console.WriteLine();            GuiDrawLine(Maze, 22); Console.WriteLine();            GuiDrawLine(Maze, 23); Console.WriteLine();            GuiDrawLine(Maze, 24); Console.WriteLine();            GuiDrawLine(Maze, 25); Console.WriteLine();            GuiDrawLine(Maze, 26); Console.WriteLine();            GuiDrawLine(Maze, 27); Console.WriteLine();            GuiDrawLine(Maze, 28); Console.WriteLine();            GuiDrawLine(Maze, 29); Console.Write("");            ConsoleKeyInfo key = Console.ReadKey();
             if (key.Key == ConsoleKey.UpArrow)
             {
                 if (Maze[(playerP[0] - 1) + ((31 - (playerP[1] + 1)) * 56)] == 0)
@@ -480,7 +524,20 @@ namespace MazeGame
             {
 
             }
-            Gui();
+            int[] goal = { 55, 30 };
+            if (steps == 4)
+            {
+                steps = 0 - new Random().Next(0, 3);
+                EncounterType();
+            }
+            else if (playerP[0] == goal[0] & playerP[1] == goal[1])
+            {
+                Win();
+            }
+            else
+            {
+                Gui();
+            }
         }
 
         // Inventory System, Adding an item and removing it 
@@ -490,6 +547,7 @@ namespace MazeGame
             CheckItemsInInventory(); 
         }
 
+        //Items and inventory
         static bool AddItem(int itemId)
         {
 
@@ -538,3 +596,6 @@ namespace MazeGame
 
     }
 }
+
+// Problem with win condition applies when standing on position next to. Even with a wall between.
+// Maze is HUGE and takes a long time completing.
