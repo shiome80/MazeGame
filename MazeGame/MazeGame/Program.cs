@@ -8,10 +8,10 @@ namespace MazeGame
         public static int steps = 0;
 
         static void Main(string[] args)
-        {
+        {
             GameMenu();
         }
-
+
         // Testing area for our codes
         private static void GameMenu()
         {
@@ -592,3 +592,6 @@ namespace MazeGame
         }
     }
 }
+
+// Problem with win condition applies when standing on position next to. Even with a wall between.
+// Maze is HUGE and takes a long time completing.
