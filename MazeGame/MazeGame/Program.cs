@@ -574,11 +574,11 @@ namespace MazeGame
             //List of items in array that'll be printed to the console 
 
             string[] inventoryItems = { "Potion of Health", "Bag of Holding", "50 Gold Coins" };
-
-            foreach (var item in inventoryItems)
-            {
-                Console.WriteLine("\n" + item.PadRight(15));
-            }
+            Console.Clear();
+            Console.WriteLine(inventoryItems[0]);
+            Console.WriteLine(inventoryItems[1]);
+            Console.WriteLine(inventoryItems[2]);
+            Console.ReadKey();
         }
 
     }
