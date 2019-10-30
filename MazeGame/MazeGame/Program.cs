@@ -645,7 +645,7 @@ namespace MazeGame
         static void Reset()
         {
             playerP[0] = 2;
-            playerP[1] = 2;
+            playerP[1] = 3;
             steps = 0;
             stats[0] = 100;
             Gui();
