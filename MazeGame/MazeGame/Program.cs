@@ -4,7 +4,7 @@ namespace MazeGame
 {
     class Program
     {
-        public static int[] playerP = { 2, 2 };
+        public static int[] playerP = { 2, 3 };
         public static int steps = 0;
         public static int[] stats = { 100, 20 };
 
@@ -526,7 +526,7 @@ namespace MazeGame
             {
 
             }
-            int[] goal = { 55, 29 };
+            int[] goal = { 55, 30 };
             if (steps == 4)
             {
                 steps = 0 - new Random().Next(0, 3);
