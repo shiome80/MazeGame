@@ -5,19 +5,18 @@ namespace MazeGame
     class Program
     {
         public static int[] playerP = { 2, 2 };
-
+        public static int[] playerStat = {100, 5 }; //Health, Luck
+        
+        
         static void Main(string[] args)
-        {
+        {
             GameMenu();
         }
-
         // Testing area for our codes
         private static void GameMenu()
         {
             Console.WriteLine("Test af forskellige tasks");
             Console.WriteLine("Brug: 1, 2, 3, 4");
-            int testInput = int.Parse(Console.ReadLine());
-
             switch (testInput)
             {
                 case 1:
